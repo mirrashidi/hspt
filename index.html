@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HSPT Prep Quest</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#243247;--line:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#38bdf8;--good:#22c55e;--bad:#ef4444;--gold:#fbbf24;--purple:#a78bfa}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(circle at 50% -20%,#1e3a5f,#0f172a 65%) fixed;color:var(--text);min-height:100vh}
+header{display:flex;align-items:center;gap:12px;padding:10px 20px;background:rgba(15,23,42,.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;cursor:pointer;margin-right:auto}
+.logo span{color:var(--gold)}
+.pill{background:var(--card);padding:6px 12px;border-radius:999px;font-size:14px;display:flex;gap:8px;align-items:center;border:1px solid var(--line)}
+.pill.click{cursor:pointer}
+.xpbar{width:120px;height:8px;background:#0b1220;border-radius:9px;overflow:hidden}
+.xpbar>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));transition:width .5s}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+h1,h2,h3{margin:.2em 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tile{cursor:pointer;transition:transform .15s,border-color .15s;position:relative}
+.tile:hover{transform:translateY(-3px);border-color:var(--accent)}
+.tile .ic{font-size:34px}
+.tile h3{margin:8px 0 4px;font-size:18px}
+.tile.feature{background:linear-gradient(135deg,#3b2a0a,#1e293b 70%);border-color:#a16207}
+.tile.mock{background:linear-gradient(135deg,#1e1b4b,#1e293b 70%);border-color:#6d28d9}
+.best{position:absolute;top:14px;right:14px;font-size:13px;background:#0f172a;border-radius:999px;padding:3px 9px;color:var(--gold)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.btn{background:var(--accent);color:#04121f;border:0;border-radius:10px;padding:10px 18px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
+.btn:hover:not(:disabled){filter:brightness(1.1)}
+.btn.sec{background:#334155;color:var(--text)}
+.btn.good{background:var(--good)}
+.btn.warn{background:var(--gold)}
+.btn.danger{background:var(--bad);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 16px}
+.chip{background:var(--card2);border:2px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;color:var(--text);font-size:14px;font-family:inherit}
+.chip.on{border-color:var(--accent);background:#0c4a6e}
+.lab{font-weight:700;margin-top:6px}
+.choice{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card2);border:2px solid var(--line);color:var(--text);border-radius:12px;padding:12px 14px;margin:8px 0;font-size:17px;line-height:1.4;cursor:pointer;font-family:inherit}
+.choice .lt{flex:none;width:28px;height:28px;border-radius:50%;background:#0f172a;display:grid;place-items:center;font-weight:700;font-size:14px}
+.choice:hover:not(:disabled){border-color:var(--accent)}
+.choice.sel{border-color:var(--accent);background:#0c4a6e}
+.choice.ok{border-color:var(--good);background:#14532d}
+.choice.no{border-color:var(--bad);background:#7f1d1d}
+.choice:disabled{cursor:default}
+.passage{background:#f8fafc;color:#0f172a;border-radius:12px;padding:16px 22px;line-height:1.65;max-height:360px;overflow:auto;font-family:Georgia,"Times New Roman",serif;font-size:16px;margin-bottom:14px}
+.passage h4{margin:0 0 6px;text-align:center}
+.passage p{margin:.5em 0;text-indent:1.5em}
+.prompt{font-size:19px;line-height:1.5;margin:4px 0 10px}
+.sent{background:#0f172a;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:18px;line-height:1.5}
+.abc{display:grid;gap:6px;background:#0f172a;border-radius:10px;padding:12px 16px;margin:10px 0;font-size:18px}
+.figs{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0}
+.figs>div{text-align:center;font-weight:700}
+.figs svg{display:block;background:#0f172a;border-radius:8px;padding:4px}
+.fb{border-radius:12px;padding:12px 16px;margin-top:12px;line-height:1.55}
+.fb.ok{background:rgba(34,197,94,.14);border:1px solid var(--good)}
+.fb.no{background:rgba(239,68,68,.12);border:1px solid var(--bad)}
+.hl b{color:var(--gold);text-decoration:underline}
+.qtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.prog{height:8px;background:#0b1220;border-radius:9px;overflow:hidden;margin-bottom:14px}
+.prog>div{height:100%;background:linear-gradient(90deg,var(--good),var(--accent));transition:width .3s}
+.timer.low{color:var(--bad);font-weight:800;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:700}
+input.type{font-size:24px;padding:12px 14px;border-radius:10px;border:2px solid var(--line);background:#0f172a;color:var(--text);width:100%;max-width:420px;font-family:inherit;letter-spacing:.04em}
+input.type:focus{outline:none;border-color:var(--accent)}
+input.name{font-size:18px;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:#0f172a;color:var(--text)}
+.big{font-size:64px;font-weight:800;line-height:1}
+.stars{font-size:40px;letter-spacing:6px}
+.rev{border-left:4px solid var(--line);padding:10px 14px;margin:10px 0;background:var(--card2);border-radius:0 10px 10px 0}
+.rev.ok{border-color:var(--good)}
+.rev.no{border-color:var(--bad)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.badge{background:var(--card2);border-radius:12px;padding:12px;text-align:center;border:1px solid var(--line)}
+.badge .bi{font-size:32px}
+.badge.locked{opacity:.35;filter:grayscale(1)}
+.bar{height:10px;background:#0b1220;border-radius:9px;overflow:hidden;flex:1}
+.bar>div{height:100%}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--gold);color:#1c1300;font-weight:800;padding:12px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.4);z-index:50;animation:pop .3s}
+.xpfloat{position:fixed;font-weight:900;color:var(--gold);font-size:22px;pointer-events:none;z-index:40;animation:float 1s forwards}
+@keyframes float{to{transform:translateY(-60px);opacity:0}}
+@keyframes pop{from{transform:translateX(-50%) scale(.6)}to{transform:translateX(-50%) scale(1)}}
+canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
+.rule h3{color:var(--gold)}
+.rule li{margin:4px 0;line-height:1.5}
+kbd{background:#0f172a;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+body.kid{--accent:#fb923c;--purple:#facc15;background:radial-gradient(circle at 50% -20%,#115e59,#0f172a 65%) fixed}
+body.kid .choice{font-size:19px}
+body.kid .prompt{font-size:21px}
+body.kid .chip.on,body.kid .choice.sel{background:#7c2d12}
+.pill.mode{border-color:var(--accent)}
+@media (max-width:600px){.xpbar{width:70px}.prompt{font-size:17px}.big{font-size:48px}}
+</style>
+</head>
+<body>
+<header id="hdr"></header>
+<main id="app"></main>
+<canvas id="confetti"></canvas>
+
+<script>
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const rnd = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function draw(bank, n) { let out = []; while (out.length < n) out = out.concat(shuffle(bank)); return out.slice(0, n); }
+const rep = (k, f) => Array.from({ length: k }, (_, i) => typeof f === 'function' ? f(i) : f);
+const gcd = (a, b) => b ? gcd(b, a % b) : Math.abs(a);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const fmt = n => Number(n).toLocaleString('en-US');
+const LET = 'ABCD';
+
+// Build a multiple-choice question. Shuffles unless explicit choices are given.
+function mc(o) {
+  if (!o.choices) {
+    const c = String(o.correct);
+    const w = [...new Set(o.wrong.map(String))].filter(x => x !== c).slice(0, 3);
+    o.choices = shuffle([c, ...w]);
+    o.answer = o.choices.indexOf(c);
+    o.shuf = true;
+  }
+  delete o.correct; delete o.wrong;
+  return o;
+}
+// Numeric distractors: plausible mistakes first, then nearby numbers.
+function nd(ans, extras = [], steps) {
+  const out = [], seen = new Set([String(ans)]);
+  const add = v => {
+    if (v == null || !isFinite(v)) return;
+    v = Math.round(v * 100) / 100;
+    if (v < 0 && ans >= 0) return;
+    if (Number.isInteger(ans) && !Number.isInteger(v)) return;
+    const k = String(v);
+    if (!seen.has(k)) { seen.add(k); out.push(v); }
+  };
+  shuffle(extras).forEach(add);
+  shuffle(steps || [1, -1, 2, -2, 3, -3, 4, 5, -5, 10, -10]).forEach(s => add(ans + s));
+  let k = 11; while (out.length < 3) add(ans + k++);
+  return out.slice(0, 3);
+}
+function fr(n, d) {
+  if (d < 0) { n = -n; d = -d; }
+  const g = gcd(n, d); n /= g; d /= g;
+  if (d === 1) return String(n);
+  const w = Math.trunc(n / d), r = Math.abs(n % d);
+  return w ? `${w} ${r}/${d}` : `${n}/${d}`;
+}
+
+/* =========================================================
+   SPELLING DATA  [correct, common misspelling, sentence]
+   ========================================================= */
+let SPELL = {
+  double: {
+    name: 'Double Consonants', icon: '👯',
+    tip: 'Double-consonant check: when adding <i>-ed</i> or <i>-ing</i> to a word that ends in one vowel + one consonant with the stress on the last syllable, double it (refer → refe<b>rr</b>ed, begin → begi<b>nn</b>ing). Many others (acco<b>mm</b>odate, e<b>mb</b>a<b>rr</b>ass, nece<b>ss</b>ary) just have to be memorized.',
+    words: [
+      ['accommodate', 'acommodate', 'The new gym can ___ more than five hundred fans.'],
+      ['occasion', 'occassion', "Grandma's birthday was a special ___ for the whole family."],
+      ['embarrass', 'embarass', "Please don't ___ me in front of my friends."],
+      ['necessary', 'neccessary', 'It is ___ to bring two pencils to the exam.'],
+      ['committee', 'commitee', 'The student ___ voted to hold a bake sale.'],
+      ['beginning', 'begining', 'The ___ of the movie was the best part.'],
+      ['recommend', 'reccomend', 'I would ___ this book to anyone who loves mysteries.'],
+      ['possession', 'posession', 'The team kept ___ of the ball for most of the game.'],
+      ['millennium', 'millenium', 'A ___ is a period of one thousand years.'],
+      ['parallel', 'paralell', 'The two railroad tracks run ___ to each other.'],
+      ['harass', 'harrass', 'The coach told the fans not to ___ the referee.'],
+      ['tomorrow', 'tommorow', 'Our science project is due ___ morning.'],
+      ['address', 'adress', 'Write your ___ at the top of the envelope.'],
+      ['successful', 'succesful', 'The fundraiser was ___ and raised over a thousand dollars.'],
+      ['aggressive', 'agressive', 'The ___ dog barked at everyone who walked by.'],
+      ['commitment', 'committment', 'Joining the band requires a ___ to practice every day.'],
+      ['referred', 'refered', 'The doctor ___ my brother to a specialist.'],
+      ['preferred', 'prefered', 'She ___ the window seat on the bus.'],
+      ['controlled', 'controled', 'The pilot calmly ___ the plane through the storm.'],
+      ['occurred', 'occured', 'The power outage ___ just after midnight.'],
+      ['omitted', 'ommitted', 'The editor ___ the last paragraph of the article.'],
+      ['questionnaire', 'questionaire', 'Every student filled out a ___ about the cafeteria food.'],
+      ['misspell', 'mispell', 'It is easy to ___ words when you write too quickly.'],
+      ['unnecessary', 'unneccessary', 'Bringing an umbrella turned out to be ___.'],
+      ['disappoint', 'dissapoint', 'I did not want to ___ my parents with a bad grade.'],
+      ['professor', 'proffesor', 'The ___ explained the experiment to the class.'],
+      ['immediately', 'imediately', 'When the fire alarm rang, we left the building ___.'],
+      ['apparent', 'apparrent', 'It was ___ that nobody had studied for the quiz.'],
+      ['approximately', 'aproximately', 'The trip takes ___ three hours by car.'],
+      ['quarrel', 'quarel', 'The twins had a ___ over who would get the last cookie.'],
+      ['forgotten', 'forgoten', 'I had ___ my lunch on the kitchen counter.'],
+      ['dilemma', 'dilema', 'Choosing between soccer and basketball was a real ___.'],
+      ['written', 'writen', 'The letter was ___ in neat cursive.'],
+      ['submitted', 'submited', 'Maria ___ her essay before the deadline.'],
+      ['equipped', 'equiped', 'The lab is ___ with brand-new microscopes.'],
+      ['excellent', 'excelent', 'Your book report was ___.'],
+      ['balloon', 'baloon', 'The giant ___ floated high above the parade.'],
+      ['exaggerate', 'exagerate', 'My little brother likes to ___ how many fish he caught.'],
+      ['opportunity', 'oportunity', 'The science fair is a great ___ to show your work.'],
+      ['challenge', 'chalenge', 'The final level of the game was a real ___.'],
+      ['across', 'accross', 'We walked ___ the bridge to get to the park.'],
+      ['until', 'untill', 'We waited inside ___ the bus arrived.'],
+      ['occasionally', 'occassionally', 'We ___ eat dinner at the diner on Main Street.'],
+      ['skillful', 'skilfull', 'The ___ surgeon finished the operation quickly.'],
+    ]
+  },
+  ance: {
+    name: '-ance vs. -ence', icon: '🎭',
+    tip: '-ance vs. -ence: If the base word has an <i>-ate/-ation</i> form, it usually takes <b>-ance</b> (tolerate → toler<b>ance</b>). After a soft c or g (sounds like “s” or “j”), use <b>-ence</b> (innoc<b>ence</b>, intellig<b>ence</b>); after a hard c or g, use <b>-ance</b> (eleg<b>ance</b>, signific<b>ance</b>). Words from <i>refer, prefer, occur</i> take <b>-ence</b>. Otherwise, memorize!',
+    words: [
+      ['appearance', 'appearence', 'Her ___ on the talk show surprised her fans.'],
+      ['attendance', 'attendence', 'The teacher takes ___ every morning.'],
+      ['performance', 'performence', "The band's ___ earned a standing ovation."],
+      ['guidance', 'guidence', 'The counselor offered ___ about choosing a high school.'],
+      ['allowance', 'allowence', 'He saved his weekly ___ to buy a new bike.'],
+      ['importance', 'importence', 'The coach stressed the ___ of teamwork.'],
+      ['tolerance', 'tolerence', 'This cactus has a high ___ for dry weather.'],
+      ['resistance', 'resistence', 'The army met little ___ as it crossed the river.'],
+      ['ignorance', 'ignorence', '___ of the rules is not an excuse for breaking them.'],
+      ['relevance', 'relevence', 'The lawyer questioned the ___ of the evidence.'],
+      ['maintenance', 'maintenence', 'The elevator was closed for ___.'],
+      ['nuisance', 'nuisence', 'The buzzing mosquito was a ___ all night.'],
+      ['elegance', 'elegence', 'The dancer moved with grace and ___.'],
+      ['assistance', 'assistence', 'Please ask the librarian for ___.'],
+      ['acquaintance', 'acquaintence', 'She is an ___ from summer camp, not a close friend.'],
+      ['balance', 'balence', 'The gymnast kept her ___ on the beam.'],
+      ['distance', 'distence', 'The runners covered a ___ of five miles.'],
+      ['entrance', 'entrence', 'Meet me at the main ___ of the museum.'],
+      ['insurance', 'insurence', 'Dad called the ___ company after the fender bender.'],
+      ['brilliance', 'brillience', 'Everyone admired the ___ of her science project.'],
+      ['independence', 'independance', 'The colonies declared their ___ in 1776.'],
+      ['existence', 'existance', 'Scientists debate the ___ of life on other planets.'],
+      ['persistence', 'persistance', 'Her ___ paid off when she finally made the team.'],
+      ['experience', 'experiance', 'Working at the summer camp was a great ___.'],
+      ['conscience', 'consciance', 'His guilty ___ kept him awake all night.'],
+      ['convenience', 'conveniance', 'The store stays open late for the ___ of its customers.'],
+      ['interference', 'interferance', 'The referee called pass ___ on the last play.'],
+      ['reference', 'referance', 'Use the dictionary as a ___ when you write.'],
+      ['confidence', 'confidance', 'Practice gave him the ___ to give his speech.'],
+      ['obedience', 'obediance', 'Our new puppy goes to ___ school on Saturdays.'],
+      ['patience', 'patiance', 'Fishing requires a lot of ___.'],
+      ['presence', 'presance', 'Your ___ is requested at the awards assembly.'],
+      ['absence', 'absance', 'The teacher noted his ___ from class.'],
+      ['evidence', 'evidance', 'The detective searched the room for ___.'],
+      ['audience', 'audiance', 'The ___ clapped loudly after the play.'],
+      ['intelligence', 'intelligance', 'Dolphins are known for their ___.'],
+      ['consequence', 'consequance', 'Losing recess was the ___ of talking in class.'],
+      ['excellence', 'excellance', 'The school is known for academic ___.'],
+      ['residence', 'residance', "The White House is the president's official ___."],
+      ['difference', 'differance', 'Can you tell the ___ between the twins?'],
+      ['sentence', 'sentance', 'Begin every ___ with a capital letter.'],
+      ['occurrence', 'occurrance', 'Snow in April is a rare ___ here.'],
+      ['preference', 'preferance', 'Do you have a ___ between pizza and tacos?'],
+      ['silence', 'silance', 'The library requires complete ___ during exams.'],
+    ]
+  },
+  ie: {
+    name: 'ie vs. ei', icon: '👁️',
+    tip: '“<b>I before E, except after C, or when sounded like “ay” as in neighbor and weigh.</b>” Watch the rule-breakers: w<b>ei</b>rd, s<b>ei</b>ze, <b>ei</b>ther, n<b>ei</b>ther, l<b>ei</b>sure, for<b>ei</b>gn, h<b>ei</b>ght, prot<b>ei</b>n, forf<b>ei</b>t, counterf<b>ei</b>t — and words where “ci” sounds like “sh” (anc<b>ie</b>nt, effic<b>ie</b>nt, suffic<b>ie</b>nt) or the letters are in separate syllables (sc<b>i-e</b>nce).',
+    words: [
+      ['believe', 'beleive', 'I ___ you can win the race.'],
+      ['receive', 'recieve', 'Did you ___ my letter last week?'],
+      ['ceiling', 'cieling', 'A spider hung from the ___ above my bed.'],
+      ['deceive', 'decieve', 'The magician tried to ___ the audience.'],
+      ['achieve', 'acheive', 'Hard work will help you ___ your goals.'],
+      ['friend', 'freind', 'My best ___ lives next door.'],
+      ['weird', 'wierd', 'We heard a ___ noise coming from the attic.'],
+      ['seize', 'sieze', 'The police will ___ the stolen goods.'],
+      ['neighbor', 'nieghbor', 'Our ___ mowed our lawn while we were away.'],
+      ['foreign', 'foriegn', 'Learning a ___ language takes practice.'],
+      ['height', 'hieght', 'The ___ of the tower is two hundred feet.'],
+      ['leisure', 'liesure', 'Reading is my favorite ___ activity.'],
+      ['piece', 'peice', 'May I have another ___ of pie?'],
+      ['niece', 'neice', 'My aunt brought her ___ to the party.'],
+      ['field', 'feild', 'The soccer ___ was muddy after the rain.'],
+      ['relief', 'releif', 'It was a ___ to finish the test.'],
+      ['receipt', 'reciept', 'Keep the ___ in case you need to return the shirt.'],
+      ['either', 'iether', 'You may choose ___ the red one or the blue one.'],
+      ['neither', 'niether', '___ of the twins likes broccoli.'],
+      ['their', 'thier', 'The students left ___ backpacks in the hall.'],
+      ['science', 'sceince', 'Our ___ teacher showed us how volcanoes work.'],
+      ['ancient', 'anceint', 'The museum displays ___ Egyptian art.'],
+      ['protein', 'protien', 'Eggs are a good source of ___.'],
+      ['weight', 'wieght', 'The ___ of the box was ten pounds.'],
+      ['shield', 'sheild', 'The knight raised his ___ to block the arrow.'],
+      ['fierce', 'feirce', 'A ___ storm knocked down power lines.'],
+      ['mischief', 'mischeif', 'The kittens got into ___ while we were gone.'],
+      ['counterfeit', 'counterfiet', 'The bank teller spotted a ___ twenty-dollar bill.'],
+      ['forfeit', 'forfiet', 'If only four players show up, we will have to ___ the game.'],
+      ['vein', 'vien', 'The nurse found a ___ in his arm.'],
+      ['reign', 'riegn', "The queen's ___ lasted more than sixty years."],
+      ['chief', 'cheif', 'The fire ___ inspected the building.'],
+      ['thief', 'theif', 'The ___ was caught on the security camera.'],
+      ['perceive', 'percieve', 'Owls can ___ movement in the dark.'],
+      ['yield', 'yeild', 'Drivers must ___ to people in the crosswalk.'],
+      ['efficient', 'efficeint', 'The new furnace is more ___ than the old one.'],
+      ['sufficient', 'sufficeint', 'We packed ___ supplies for the camping trip.'],
+      ['grief', 'greif', 'The family was filled with ___ after the loss.'],
+      ['heir', 'hier', 'The prince is the ___ to the throne.'],
+      ['freight', 'frieght', 'The ___ train rumbled through town.'],
+      ['conceive', 'concieve', 'It is hard to ___ how big the universe is.'],
+      ['brief', 'breif', 'The principal gave a ___ speech at the assembly.'],
+    ]
+  }
+};
+let ALLW = [];
+function buildAllW() { ALLW = []; for (const c in SPELL) SPELL[c].words.forEach(([w, x, s]) => ALLW.push({ w, x, s, cat: c })); }
+buildAllW();
+const poolFor = cat => cat === 'all' ? ALLW : ALLW.filter(o => o.cat === cat);
+const fillS = (s, word) => cap(s.replace('___', word));
+function hl(word, cat) {
+  if (cat === 'double') return word.replace(/([b-df-hj-np-tv-z])\1/gi, '<b>$&</b>');
+  if (cat === 'ance') return word.replace(/(ance|ence)$/, '<b>$1</b>');
+  return word.replace(/ie|ei/, '<b>$&</b>');
+}
+// Generate believable misspellings for the "pick the right spelling" drill
+function variants(w) {
+  const out = new Set();
+  for (let i = 0; i < w.length - 1; i++) { const p = w.slice(i, i + 2); if (p === 'ie' || p === 'ei') out.add(w.slice(0, i) + p[1] + p[0] + w.slice(i + 2)); }
+  [['ance', 'ence'], ['ence', 'ance']].forEach(([a, b]) => { if (w.endsWith(a)) out.add(w.slice(0, -a.length) + b); });
+  for (let i = 0; i < w.length - 1; i++) if (w[i] === w[i + 1] && !'aeiou'.includes(w[i])) out.add(w.slice(0, i) + w.slice(i + 1));
+  for (let i = 1; i < w.length - 1; i++) if ('bcdfglmnprst'.includes(w[i]) && w[i - 1] !== w[i] && w[i + 1] !== w[i] && 'aeiou'.includes(w[i - 1])) out.add(w.slice(0, i) + w[i] + w.slice(i));
+  out.delete(w);
+  let res = shuffle([...out]);
+  const fb = [w.replace('ie', 'ee'), w.replace('ei', 'ee'), w + w.slice(-1), w.replace(/e$/, 'a'), w.replace(/([aeiou])/, '$1$1')];
+  fb.forEach(f => { if (f !== w && !res.includes(f)) res.push(f); });
+  return res;
+}
+
+/* =========================================================
+   VERBAL SKILLS DATA
+   ========================================================= */
+let SYN = [
+  ['abundant', 'plentiful', 'scarce', 'heavy', 'quiet'],
+  ['candid', 'frank', 'sweet', 'hidden', 'careful'],
+  ['diligent', 'hardworking', 'lazy', 'clever', 'gentle'],
+  ['reluctant', 'unwilling', 'eager', 'sad', 'quick'],
+  ['fragile', 'delicate', 'sturdy', 'ancient', 'valuable'],
+  ['vivid', 'bright', 'dull', 'alive', 'angry'],
+  ['conceal', 'hide', 'reveal', 'destroy', 'build'],
+  ['ample', 'sufficient', 'tiny', 'sudden', 'empty'],
+  ['hostile', 'unfriendly', 'kind', 'timid', 'crowded'],
+  ['meager', 'scanty', 'lavish', 'eager', 'honest'],
+  ['prudent', 'wise', 'foolish', 'proud', 'rude'],
+  ['tedious', 'boring', 'thrilling', 'careful', 'fragile'],
+  ['obsolete', 'outdated', 'modern', 'obvious', 'useful'],
+  ['serene', 'calm', 'noisy', 'bright', 'serious'],
+  ['feeble', 'weak', 'mighty', 'foolish', 'cheerful'],
+  ['elated', 'overjoyed', 'depressed', 'late', 'tired'],
+  ['benevolent', 'kind', 'cruel', 'wealthy', 'famous'],
+  ['frugal', 'thrifty', 'wasteful', 'fruitful', 'cheerful'],
+  ['inquire', 'ask', 'answer', 'require', 'inspire'],
+  ['vacant', 'empty', 'occupied', 'vague', 'quiet'],
+  ['lethargic', 'sluggish', 'energetic', 'deadly', 'thoughtful'],
+  ['novice', 'beginner', 'expert', 'story', 'judge'],
+  ['adversary', 'opponent', 'ally', 'advisor', 'ancestor'],
+  ['contemplate', 'consider', 'ignore', 'complete', 'compete'],
+  ['robust', 'sturdy', 'weak', 'rude', 'rapid'],
+  ['jubilant', 'joyful', 'jealous', 'gloomy', 'youthful'],
+  ['impartial', 'fair', 'incomplete', 'biased', 'partial'],
+  ['loathe', 'hate', 'love', 'lend', 'loaf'],
+  ['dilapidated', 'run-down', 'expensive', 'repaired', 'distant'],
+  ['concise', 'brief', 'wordy', 'precise', 'cruel'],
+];
+let ANT = [
+  ['generous', 'stingy', 'kind', 'giving', 'rich'],
+  ['ancient', 'modern', 'old', 'historic', 'broken'],
+  ['expand', 'contract', 'grow', 'explain', 'export'],
+  ['timid', 'bold', 'shy', 'quiet', 'tiny'],
+  ['victory', 'defeat', 'triumph', 'battle', 'prize'],
+  ['transparent', 'opaque', 'clear', 'thin', 'visible'],
+  ['scarce', 'plentiful', 'rare', 'scared', 'tiny'],
+  ['praise', 'criticize', 'compliment', 'pray', 'reward'],
+  ['reckless', 'careful', 'wild', 'careless', 'fast'],
+  ['humble', 'arrogant', 'modest', 'simple', 'quiet'],
+  ['artificial', 'natural', 'fake', 'artistic', 'clever'],
+  ['vague', 'clear', 'unclear', 'empty', 'gentle'],
+  ['reject', 'accept', 'refuse', 'deny', 'eject'],
+  ['temporary', 'permanent', 'brief', 'temperate', 'short'],
+  ['hinder', 'help', 'block', 'hide', 'delay'],
+  ['vertical', 'horizontal', 'upright', 'tall', 'steep'],
+  ['optimistic', 'pessimistic', 'hopeful', 'cheerful', 'opinionated'],
+  ['frequent', 'rare', 'often', 'regular', 'frantic'],
+  ['conceal', 'reveal', 'hide', 'cover', 'contain'],
+  ['inferior', 'superior', 'lower', 'interior', 'inner'],
+  ['novice', 'veteran', 'beginner', 'student', 'newcomer'],
+  ['shallow', 'deep', 'narrow', 'swallow', 'wet'],
+  ['diminish', 'increase', 'reduce', 'finish', 'shrink'],
+  ['courteous', 'rude', 'polite', 'royal', 'brave'],
+];
+let ANA = [
+  ['Glove is to hand as sock is to', 'foot', 'shoe', 'arm', 'leg', 'A glove covers a hand; a sock covers a foot.'],
+  ['Bird is to nest as bee is to', 'hive', 'honey', 'flower', 'sting', 'A bird lives in a nest; a bee lives in a hive.'],
+  ['Author is to book as composer is to', 'symphony', 'piano', 'orchestra', 'singer', 'An author creates a book; a composer creates a symphony.'],
+  ['Puppy is to dog as kitten is to', 'cat', 'lion', 'yarn', 'pet', 'A puppy is a young dog; a kitten is a young cat.'],
+  ['Hot is to cold as tall is to', 'short', 'high', 'large', 'warm', 'Hot and cold are opposites; tall and short are opposites.'],
+  ['Fish is to school as wolf is to', 'pack', 'flock', 'den', 'herd', 'A group of fish is a school; a group of wolves is a pack.'],
+  ['Thermometer is to temperature as scale is to', 'weight', 'height', 'fish', 'speed', 'A thermometer measures temperature; a scale measures weight.'],
+  ['Petal is to flower as page is to', 'book', 'paper', 'word', 'library', 'A petal is part of a flower; a page is part of a book.'],
+  ['Hungry is to eat as tired is to', 'sleep', 'yawn', 'bed', 'run', 'When you are hungry you eat; when you are tired you sleep.'],
+  ['Carpenter is to hammer as surgeon is to', 'scalpel', 'hospital', 'doctor', 'patient', 'A carpenter uses a hammer; a surgeon uses a scalpel.'],
+  ['Water is to thirst as food is to', 'hunger', 'eat', 'plate', 'meal', 'Water satisfies thirst; food satisfies hunger.'],
+  ['Pen is to write as knife is to', 'cut', 'sharp', 'fork', 'kitchen', 'A pen is used to write; a knife is used to cut.'],
+  ['Square is to cube as circle is to', 'sphere', 'round', 'triangle', 'line', 'A cube is the 3-D form of a square; a sphere is the 3-D form of a circle.'],
+  ['Library is to books as gallery is to', 'paintings', 'museum', 'artist', 'frame', 'A library displays books; a gallery displays paintings.'],
+  ['Cow is to calf as horse is to', 'foal', 'stable', 'saddle', 'mare', 'A calf is a baby cow; a foal is a baby horse.'],
+  ['Teacher is to school as doctor is to', 'hospital', 'nurse', 'medicine', 'patient', 'A teacher works in a school; a doctor works in a hospital.'],
+  ['Up is to down as left is to', 'right', 'side', 'turn', 'west', 'Up/down and left/right are opposite directions.'],
+  ['Bark is to tree as skin is to', 'body', 'hair', 'cloth', 'leaf', 'Bark is the outer covering of a tree; skin is the outer covering of a body.'],
+  ['Chapter is to novel as scene is to', 'play', 'actor', 'stage', 'curtain', 'A novel is divided into chapters; a play is divided into scenes.'],
+  ['Mile is to distance as hour is to', 'time', 'clock', 'minute', 'speed', 'A mile measures distance; an hour measures time.'],
+  ['Drought is to rain as famine is to', 'food', 'water', 'hunger', 'desert', 'A drought is a lack of rain; a famine is a lack of food.'],
+  ['Kennel is to dog as stable is to', 'horse', 'barn', 'hay', 'saddle', 'A dog is kept in a kennel; a horse is kept in a stable.'],
+  ['Brave is to cowardly as wise is to', 'foolish', 'smart', 'old', 'owl', 'Brave/cowardly and wise/foolish are opposites.'],
+  ['Seed is to plant as egg is to', 'bird', 'nest', 'shell', 'yolk', 'A plant grows from a seed; a bird hatches from an egg.'],
+  ['Pilot is to airplane as captain is to', 'ship', 'sailor', 'ocean', 'anchor', 'A pilot commands an airplane; a captain commands a ship.'],
+  ['Gills are to fish as lungs are to', 'humans', 'air', 'breathe', 'chest', 'Fish breathe with gills; humans breathe with lungs.'],
+];
+let CLS = [
+  [['apple', 'banana', 'grape', 'carrot'], 'carrot', 'The others are fruits; a carrot is a vegetable.'],
+  [['violin', 'cello', 'guitar', 'trumpet'], 'trumpet', 'The others are string instruments; a trumpet is a brass instrument.'],
+  [['Mercury', 'Mars', 'Venus', 'Moon'], 'Moon', 'The others are planets; the Moon is a satellite.'],
+  [['happy', 'joyful', 'cheerful', 'gloomy'], 'gloomy', 'The others mean glad; gloomy means sad.'],
+  [['circle', 'square', 'triangle', 'cube'], 'cube', 'The others are flat (2-D) shapes; a cube is 3-D.'],
+  [['inch', 'foot', 'yard', 'pound'], 'pound', 'The others measure length; a pound measures weight.'],
+  [['robin', 'eagle', 'sparrow', 'bat'], 'bat', 'The others are birds; a bat is a mammal.'],
+  [['oak', 'maple', 'pine', 'rose'], 'rose', 'The others are trees; a rose is a flower.'],
+  [['run', 'sprint', 'jog', 'sit'], 'sit', 'The others are ways of moving quickly; sit is not.'],
+  [['copper', 'iron', 'silver', 'wood'], 'wood', 'The others are metals.'],
+  [['noun', 'verb', 'adjective', 'sentence'], 'sentence', 'The others are parts of speech.'],
+  [['lake', 'pond', 'river', 'island'], 'island', 'The others are bodies of water; an island is land.'],
+  [['Spain', 'Italy', 'France', 'Paris'], 'Paris', 'The others are countries; Paris is a city.'],
+  [['shark', 'trout', 'salmon', 'dolphin'], 'dolphin', 'The others are fish; a dolphin is a mammal.'],
+  [['liter', 'gallon', 'quart', 'mile'], 'mile', 'The others measure volume; a mile measures distance.'],
+  [['whisper', 'murmur', 'mumble', 'shout'], 'shout', 'The others are quiet ways of speaking.'],
+  [['January', 'March', 'June', 'Monday'], 'Monday', 'The others are months; Monday is a day.'],
+  [['ear', 'nose', 'eye', 'elbow'], 'elbow', 'The others are sense organs.'],
+  [['ancient', 'old', 'aged', 'new'], 'new', 'The others mean old.'],
+  [['telescope', 'microscope', 'binoculars', 'stethoscope'], 'stethoscope', 'The others help you see; a stethoscope helps you hear.'],
+  [['furious', 'angry', 'irate', 'calm'], 'calm', 'The others mean angry.'],
+  [['sofa', 'chair', 'bench', 'table'], 'table', 'The others are for sitting.'],
+];
+// [statement1, statement2, statement3, answer(0=true,1=false,2=uncertain), explanation]
+let LOGIC = [
+  ['All dogs bark.', 'Rex is a dog.', 'Rex barks.', 0, 'If all dogs bark and Rex is a dog, Rex must bark.'],
+  ['Sam is taller than Ali.', 'Ali is taller than Jo.', 'Jo is taller than Sam.', 1, 'Order: Sam > Ali > Jo. Jo is the shortest, so the statement is false.'],
+  ['Mia is older than Ben.', 'Mia is older than Kate.', 'Ben is older than Kate.', 2, 'We only know Mia is oldest. Ben and Kate are never compared, so it is uncertain.'],
+  ['The red box is heavier than the blue box.', 'The green box is heavier than the red box.', 'The blue box is the lightest of the three.', 0, 'Order: green > red > blue. Blue is lightest — true.'],
+  ['All roses are flowers.', 'Some flowers are red.', 'Some roses are red.', 2, 'The red flowers might not be roses. We cannot be sure — uncertain.'],
+  ['Building A is taller than Building B.', 'Building C is shorter than Building B.', 'Building C is taller than Building A.', 1, 'Order: A > B > C. C is the shortest — false.'],
+  ['Every student in Room 12 plays an instrument.', 'Lily is in Room 12.', 'Lily plays the piano.', 2, 'Lily plays some instrument, but we do not know it is the piano — uncertain.'],
+  ['Joe scored more points than Max.', 'Max scored more points than Leo.', 'Joe scored more points than Leo.', 0, 'Joe > Max > Leo, so Joe > Leo — true.'],
+  ['Apples cost more than pears.', 'Pears cost more than plums.', 'Plums cost more than apples.', 1, 'Apples > pears > plums. Plums are cheapest — false.'],
+  ['No reptiles have fur.', 'A snake is a reptile.', 'A snake has fur.', 1, 'No reptile has fur, and a snake is a reptile — false.'],
+  ['Tuesday was colder than Monday.', 'Wednesday was colder than Monday.', 'Wednesday was colder than Tuesday.', 2, 'Both were colder than Monday, but Tuesday and Wednesday are never compared — uncertain.'],
+  ['Carla runs faster than Dana.', 'Erin runs faster than Carla.', 'Dana runs faster than Erin.', 1, 'Erin > Carla > Dana. Dana is slowest — false.'],
+  ['All of the cookies in the jar are oatmeal.', 'Tom ate a cookie from the jar.', 'Tom ate an oatmeal cookie.', 0, 'Every cookie in the jar is oatmeal — true.'],
+  ['Ann lives east of Bob.', 'Cal lives west of Bob.', 'Ann lives east of Cal.', 0, 'West to east: Cal, Bob, Ann. Ann is east of Cal — true.'],
+  ['The library opens before the bank.', 'The post office opens after the bank.', 'The library opens before the post office.', 0, 'Library, then bank, then post office — true.'],
+  ['Some students in the club play chess.', 'Ravi is in the club.', 'Ravi plays chess.', 2, 'Only some members play chess; Ravi may or may not — uncertain.'],
+  ['Pat has more marbles than Lee.', 'Lee has more marbles than Kim.', 'Kim has the most marbles.', 1, 'Pat > Lee > Kim. Kim has the fewest — false.'],
+  ['Train X is faster than Train Y.', 'Train Z is slower than Train X.', 'Train Z is faster than Train Y.', 2, 'X is fastest, but Y and Z are never compared — uncertain.'],
+];
+
+/* =========================================================
+   READING DATA
+   ========================================================= */
+let PASSAGES = [
+  {
+    title: "The Monarch's Journey",
+    text: [
+      'Every autumn, millions of monarch butterflies in eastern North America begin an extraordinary journey. Traveling as far as 3,000 miles, they fly south to the mountain forests of central Mexico, where they cluster together on fir trees to survive the winter. What makes this trip remarkable is that no single butterfly has ever made it before.',
+      'Most monarchs live only two to six weeks. However, the generation born in late summer is different. These butterflies can live up to eight months, long enough to fly to Mexico, wait out the winter, and begin the return trip in spring. Along the way north, they lay eggs, and it takes several generations to complete the journey back to Canada and the northern United States.',
+      'Monarchs depend on a plant called milkweed. Females lay their eggs only on milkweed leaves, and the caterpillars eat nothing else. The milkweed contains chemicals that make the caterpillars, and later the adult butterflies, taste bitter to birds. The monarch\'s bright orange wings serve as a warning to predators to stay away.',
+      'Today, monarch populations are shrinking. Scientists believe that the loss of milkweed and of winter forest habitat are among the main causes. Many people now plant milkweed in their gardens to help the butterflies survive.'
+    ],
+    qs: [
+      ['The main idea of this passage is that', 'monarch butterflies make a long migration and need special conditions to survive', ['milkweed is the most common plant in North America', 'birds are the main predators of all butterflies', 'monarchs live for only a few weeks'], 'The passage describes the migration and what monarchs need (milkweed, forests) to survive.'],
+      ['According to the passage, the monarchs that fly to Mexico', 'live much longer than most monarchs', ['have made the trip many times before', 'eat fir trees during the winter', 'are born in early spring'], 'Paragraph 2: the late-summer generation can live up to eight months instead of two to six weeks.'],
+      ['As used in the first paragraph, the word <i>cluster</i> most nearly means', 'gather closely', ['fly quickly', 'hide alone', 'search for food'], 'Butterflies cluster together = they gather closely in groups.'],
+      ['Why do birds usually avoid eating monarchs?', 'Monarchs taste bitter because of chemicals from milkweed.', ['Monarchs are too fast to catch.', 'Monarchs fly only at night.', 'Monarchs live too high in the mountains.'], 'Paragraph 3 explains the milkweed chemicals make them taste bitter.'],
+      ['It can be inferred that planting milkweed helps monarchs because', 'it gives females a place to lay eggs and caterpillars food to eat', ['it keeps the butterflies warm in winter', 'it makes their wings brighter', 'it shortens their migration'], 'Females lay eggs only on milkweed, and caterpillars eat only milkweed.'],
+      ['The author\'s main purpose in writing this passage is', 'to inform readers about monarch butterflies', ['to persuade readers to move to Mexico', 'to tell a funny story about a butterfly', 'to explain how to raise caterpillars at home'], 'The passage gives facts — its purpose is to inform.'],
+    ]
+  },
+  {
+    title: 'Clinton\'s Ditch',
+    text: [
+      'Before the 1820s, moving goods from the East Coast to the Great Lakes region was slow and expensive. Wagons pulled by horses bumped along muddy roads, and shipping a ton of flour from Buffalo to New York City could take weeks and cost a small fortune.',
+      'In 1817, New York governor DeWitt Clinton convinced the state to build a canal connecting the Hudson River at Albany to Lake Erie at Buffalo. Many people laughed at the idea and called it "Clinton\'s Ditch." The canal would have to stretch 363 miles through forests, swamps, and hills. Workers, many of them recent immigrants, dug it largely by hand with shovels, picks, and the help of mules.',
+      'When the Erie Canal opened in 1825, it was an immediate success. Shipping costs fell by about 90 percent, and the trip took days instead of weeks. Towns such as Rochester, Syracuse, and Buffalo grew rapidly, and New York City became the busiest port in the nation.',
+      'Although railroads later replaced the canal as the main way to carry goods, the Erie Canal is still in use today, mostly by pleasure boats and tourists.'
+    ],
+    qs: [
+      ['This passage is mainly about', 'how the Erie Canal was built and how it changed trade', ['the life of DeWitt Clinton', 'why railroads are better than canals', 'the history of New York City\'s harbor'], 'Most of the passage covers the canal\'s construction and its effects on shipping.'],
+      ['Why did people call the canal "Clinton\'s Ditch"?', 'They doubted the project would succeed.', ['Clinton dug the canal himself.', 'The canal was very shallow and muddy.', 'It was named after a river.'], 'People "laughed at the idea" — the nickname was mocking.'],
+      ['According to the passage, after the canal opened, shipping costs', 'dropped by about 90 percent', ['doubled', 'stayed the same', 'rose slightly'], 'Paragraph 3: "Shipping costs fell by about 90 percent."'],
+      ['As used in the passage, the word <i>immediate</i> most nearly means', 'instant', ['slow', 'temporary', 'small'], 'An immediate success happened right away — instantly.'],
+      ['Which statement is supported by the passage?', 'The canal helped cities along its route to grow.', ['The canal was finished in less than a year.', 'The canal is no longer used at all.', 'Machines did most of the digging.'], 'Rochester, Syracuse, and Buffalo "grew rapidly."'],
+      ['How long is the Erie Canal, according to the passage?', '363 miles', ['1,825 miles', '90 miles', '817 miles'], 'Paragraph 2: "stretch 363 miles."'],
+    ]
+  },
+  {
+    title: 'The Tryout',
+    text: [
+      'Noah\'s sneakers squeaked on the gym floor as he waited in line. Twenty boys were trying out for the basketball team, and only twelve would make it. His hands felt clammy, and he kept wiping them on his shorts.',
+      '"Next!" called Coach Ramirez. Noah stepped up to the free-throw line. He bounced the ball twice, the way his older sister Ana had taught him, and took a deep breath. The first shot clanged off the rim. So did the second. Noah heard someone snicker behind him.',
+      'He closed his eyes for a moment and remembered the hundreds of evenings he and Ana had spent at the park, shooting until the streetlights came on. "Don\'t think about the crowd," she always said. "Think about the hoop." Noah opened his eyes, focused on the front of the rim, and let the ball fly. Swish. Then another. And another.',
+      'When the list was posted the next morning, Noah scanned it nervously. His name was the eleventh one down. He grinned and ran to find Ana.'
+    ],
+    qs: [
+      ['At the beginning of the story, Noah feels', 'nervous', ['bored', 'angry', 'confident'], 'Clammy hands and wiping them on his shorts show nervousness.'],
+      ['As used in the story, <i>clammy</i> most nearly means', 'damp and sweaty', ['warm and dry', 'strong', 'clean'], 'He keeps wiping his hands — they are damp and sweaty.'],
+      ['What helped Noah make his later shots?', 'remembering his sister\'s advice', ['the coach\'s encouragement', 'a new pair of sneakers', 'the cheering of the crowd'], 'He remembered Ana saying, "Think about the hoop."'],
+      ['Which best states the theme of the story?', 'Practice and focus can help you overcome pressure.', ['Winning is the only thing that matters.', 'You should never listen to your siblings.', 'Basketball is harder than other sports.'], 'Noah\'s practice and focus helped him succeed under pressure.'],
+      ['Why does Noah run to find Ana at the end?', 'to share the good news that he made the team', ['to ask her to teach him more', 'to complain about the coach', 'to tell her he quit'], 'His name was on the list, and he grinned — he wants to share the news.'],
+      ['From the story, we can infer that Ana', 'cares about helping her brother succeed', ['did not want Noah to play', 'is the team\'s coach', 'has never played basketball'], 'She spent hundreds of evenings practicing with him.'],
+    ]
+  },
+  {
+    title: 'A Master of Disguise',
+    text: [
+      'The octopus may be one of the most unusual animals in the ocean. It has eight flexible arms lined with suckers that can taste as well as grip. It has three hearts: two pump blood to the gills, and one pumps blood to the rest of the body. Its blood is even blue, because it contains a copper-based substance that carries oxygen.',
+      'Octopuses are also remarkably intelligent. In laboratories, they have learned to unscrew jar lids to reach food inside, and some have escaped from their tanks by squeezing through tiny openings. Because an octopus has no bones, it can fit through almost any gap larger than its beak, the only hard part of its body.',
+      'Perhaps the octopus\'s most impressive skill is camouflage. Special cells in its skin allow it to change color and even texture in a fraction of a second. An octopus can blend into rocks, sand, or coral, hiding from predators such as sharks and eels. If camouflage fails, it can squirt a cloud of dark ink and jet away.'
+    ],
+    qs: [
+      ['Which would be the best title for this passage?', 'Amazing Abilities of the Octopus', ['How Sharks Hunt', 'Life on a Coral Reef', 'Why the Ocean Is Blue'], 'The whole passage describes the octopus\'s unusual traits and skills.'],
+      ['According to the passage, an octopus\'s blood is blue because', 'it contains a copper-based substance', ['it lives in deep blue water', 'it eats blue fish', 'it has three hearts'], 'Paragraph 1: "a copper-based substance that carries oxygen."'],
+      ['An octopus can squeeze through small openings because', 'it has no bones', ['it can change color', 'it has eight arms', 'its ink makes it slippery'], 'Paragraph 2: "Because an octopus has no bones…"'],
+      ['As used in the passage, <i>camouflage</i> means', 'blending in with surroundings', ['swimming quickly', 'squirting ink', 'hunting for food'], 'It changes color to "blend into rocks, sand, or coral."'],
+      ['Which is NOT mentioned as a way the octopus protects itself?', 'stinging predators with its arms', ['changing color', 'squirting ink', 'jetting away'], 'Stinging is never mentioned.'],
+      ['The examples of unscrewing jar lids and escaping tanks are used to show that octopuses are', 'intelligent', ['dangerous', 'lazy', 'hungry'], 'They support the sentence "Octopuses are also remarkably intelligent."'],
+    ]
+  }
+];
+let VOCAB = [
+  ['a <u>jovial</u> host', 'cheerful', 'gloomy', 'wealthy', 'strict'],
+  ['a <u>meticulous</u> worker', 'careful', 'sloppy', 'tired', 'famous'],
+  ['a <u>perilous</u> journey', 'dangerous', 'short', 'boring', 'pleasant'],
+  ['to <u>reside</u> in the city', 'live', 'work', 'shop', 'travel'],
+  ['<u>commence</u> the ceremony', 'begin', 'end', 'attend', 'cancel'],
+  ['<u>ponder</u> the question', 'think about', 'answer', 'ignore', 'write down'],
+  ['<u>replenish</u> the supply', 'refill', 'use up', 'count', 'hide'],
+  ['a <u>hasty</u> decision', 'rushed', 'wise', 'difficult', 'final'],
+  ['a <u>vast</u> desert', 'huge', 'hot', 'empty', 'tiny'],
+  ['a <u>docile</u> animal', 'gentle', 'wild', 'rare', 'large'],
+  ['<u>illuminate</u> the room', 'light up', 'clean', 'decorate', 'darken'],
+  ['a <u>trivial</u> matter', 'unimportant', 'serious', 'puzzling', 'secret'],
+  ['an <u>astute</u> observer', 'sharp', 'careless', 'silent', 'nervous'],
+  ['a <u>dwindling</u> supply', 'shrinking', 'growing', 'fresh', 'hidden'],
+  ['an <u>authentic</u> painting', 'genuine', 'fake', 'colorful', 'expensive'],
+  ['a <u>notorious</u> outlaw', 'infamous', 'honorable', 'unknown', 'retired'],
+  ['a <u>mediocre</u> performance', 'ordinary', 'outstanding', 'terrible', 'lengthy'],
+  ['a <u>vigilant</u> guard', 'watchful', 'sleepy', 'cruel', 'strong'],
+  ['<u>endure</u> the pain', 'bear', 'cause', 'avoid', 'cure'],
+  ['an <u>impartial</u> judge', 'fair', 'unfair', 'angry', 'young'],
+  ['<u>emulate</u> a hero', 'imitate', 'defeat', 'meet', 'forget'],
+  ['an <u>arduous</u> climb', 'difficult', 'easy', 'quick', 'scenic'],
+  ['a <u>fortunate</u> accident', 'lucky', 'tragic', 'strange', 'planned'],
+  ['<u>reprimand</u> the student', 'scold', 'praise', 'teach', 'excuse'],
+];
+
+/* =========================================================
+   LANGUAGE DATA
+   ========================================================= */
+let LANG_BAD = [
+  ['My sister and me went to the mall after school.', 'Use <b>I</b>, not <i>me</i>, as part of a subject: "My sister and I went…"'],
+  ['We visited the grand canyon last summer.', 'The name of a specific place is capitalized: <b>Grand Canyon</b>.'],
+  ['The dog wagged it\'s tail happily.', '<i>It\'s</i> means "it is." The possessive is <b>its</b>.'],
+  ['Their going to the game after school.', '<i>Their</i> shows ownership. Use <b>They\'re</b> (they are).'],
+  ['Each of the students have a locker.', '<i>Each</i> is singular, so use <b>has</b>.'],
+  ['She runs more faster than her brother.', 'Don\'t double up comparisons: "runs <b>faster</b>."'],
+  ['I seen that movie three times.', 'Use <b>saw</b> or <b>have seen</b>; <i>seen</i> needs a helping verb.'],
+  ['Between you and I, the test was easy.', 'After a preposition (<i>between</i>), use <b>me</b>.'],
+  ['The team won they\'re first game.', 'Use the possessive <b>their</b>.'],
+  ['My birthday is on july 4.', 'Months are capitalized: <b>July</b>.'],
+  ['Who\'s backpack is on the floor?', '<i>Who\'s</i> means "who is." Use <b>Whose</b> for ownership.'],
+  ['He don\'t like spinach.', 'With <i>he</i>, use <b>doesn\'t</b>.'],
+  ['The books on the shelf is dusty.', 'The subject is <i>books</i> (plural), so use <b>are</b>.'],
+  ['Mr. Lee asked, "where is your homework?"', 'The first word of a quotation is capitalized: <b>"Where</b>.'],
+  ['Its going to rain tomorrow.', 'Use <b>It\'s</b> (it is).'],
+  ['I could of finished sooner.', 'The correct phrase is <b>could have</b>.'],
+  ['Neither the coach nor the players was happy.', 'With <i>neither…nor</i>, the verb agrees with the closer subject (<i>players</i>): <b>were</b>.'],
+  ['Lie the book on the table.', 'To place something is <b>lay</b>: "Lay the book…"'],
+  ['She did good on her math test.', 'Use the adverb <b>well</b> to describe how she did.'],
+  ['The childrens\' toys were everywhere.', '<i>Children</i> is already plural; the possessive is <b>children\'s</b>.'],
+  ['Tom asked if I wanted to go?', 'This is an indirect question; it ends with a <b>period</b>.'],
+  ['The weather was cold, we stayed inside.', 'Comma splice! Use a semicolon or add <b>so</b>: "cold, so we stayed inside."'],
+  ['There are less students in class today.', 'Use <b>fewer</b> for things you can count.'],
+  ['Him and his brother built a treehouse.', 'Use <b>He</b> as part of the subject.'],
+  ['My dad works for the united states postal service.', 'Names of organizations are capitalized: <b>United States Postal Service</b>.'],
+  ['Have you ever been to paris, France?', 'City names are capitalized: <b>Paris</b>.'],
+  ['I have went to that store before.', 'Use <b>have gone</b>, not <i>have went</i>.'],
+  ['The movie was real good.', 'Use the adverb <b>really</b> to modify <i>good</i>.'],
+  ['My mother, who is a nurse works at night.', 'The phrase <i>who is a nurse</i> needs a comma on <b>both</b> sides.'],
+  ['Jake is taller then his cousin.', 'For comparisons, use <b>than</b>.'],
+  ['The principal gave the award to Sam and I.', 'After the preposition <i>to</i>, use <b>me</b>.'],
+  ['Your welcome to join us for lunch.', 'Use <b>You\'re</b> (you are).'],
+  ['Mrs. Garcia is my favorite Teacher.', '<i>Teacher</i> is a common noun here and should not be capitalized.'],
+  ['We celebrate Thanksgiving in november.', 'Months are capitalized: <b>November</b>.'],
+  ['The cat and the dog is sleeping on the porch.', 'A compound subject joined by <i>and</i> takes <b>are</b>.'],
+  ['Everyone except Carlos have finished the test.', '<i>Everyone</i> is singular, so use <b>has</b>.'],
+  ['Where are you going after school.', 'A question must end with a <b>question mark</b>.'],
+  ['We need the following items, pencils, paper, and erasers.', 'Use a <b>colon</b> before a list: "items: pencils…"'],
+];
+let LANG_OK = [
+  'My brother and I walked to the library after school.',
+  'The Mississippi River flows into the Gulf of Mexico.',
+  'She asked, "May I borrow your pencil?"',
+  'Whose jacket is hanging on the chair?',
+  'The dog chased its tail around the yard.',
+  'They\'re planning a surprise party for Dad.',
+  'Each of the players has a new uniform.',
+  'We need three things: milk, eggs, and bread.',
+  'Neither the teacher nor the students were late.',
+  'He did well on the spelling test.',
+  'The children\'s books are on the bottom shelf.',
+  'My aunt lives in Denver, Colorado.',
+  'Our class visited the Museum of Natural History.',
+  'There are fewer cookies in the jar than yesterday.',
+  'Please lay the towels on the bench.',
+  'After the game, we went out for pizza.',
+  'Jake is taller than his older cousin.',
+  'I have gone to that camp for three summers.',
+  'You\'re invited to my birthday party on Friday.',
+  'The coach gave the trophy to Maria and me.',
+  'It\'s going to be sunny on Saturday.',
+  'My mother, who is a nurse, works the night shift.',
+  'The Fourth of July is my favorite holiday.',
+  'Dr. Patel examined my sore throat.',
+  'We read <i>Charlotte\'s Web</i> in third grade.',
+  'Although it was raining, the game continued.',
+  'He doesn\'t want to miss the bus.',
+  'The books on the shelf are very old.',
+  'Sam and his sister built a snowman.',
+  'The movie was really exciting.',
+  'Mount Everest is the tallest mountain in the world.',
+  'The students lined up quietly in the hall.',
+  'Do you know where the scissors are?',
+  'I could have finished the race faster.',
+  'Everyone except Carlos has finished the test.',
+  'Our family drove to Lake Tahoe in August.',
+];
+// [prompt, correct, [wrong x3], explanation, fixedOrderChoices?]
+let COMPO = [
+  ['Choose the word that best completes the sentence.<div class="sent">The roads were covered with ice; ______, school was canceled.</div>', 'therefore', ['however', 'although', 'unless'], '<b>Therefore</b> shows a cause-and-effect result.'],
+  ['Choose the word that best completes the sentence.<div class="sent">Mia practiced every day; ______, she still felt nervous before the recital.</div>', 'nevertheless', ['consequently', 'therefore', 'because'], '<b>Nevertheless</b> shows contrast — something unexpected happened.'],
+  ['Choose the word that best completes the sentence.<div class="sent">______ it was raining, we went on our hike anyway.</div>', 'Although', ['Because', 'Since', 'Therefore'], '<b>Although</b> introduces a contrast.'],
+  ['Choose the sentence that is written correctly.', 'When the bell rang, the students hurried to class.', ['When the bell rang the students, hurried to class.', 'The bell rang the students hurried to class.', 'When the bell rang. The students hurried to class.'], 'The correct one has a comma after the introductory clause and no run-on or fragment.'],
+  ['Which sentence expresses the idea most clearly?', 'While I was walking to school, I saw a deer.', ['Walking to school, a deer was seen by me.', 'I saw a deer walking to school while I was.', 'A deer, while walking to school, I saw.'], 'The others have misplaced modifiers or awkward order (it sounds like the deer was walking to school!).'],
+  ['Which topic is best suited for a one-paragraph essay?', 'How to make a paper airplane', ['The history of flight', 'Every sport played in America', 'World War II'], 'The others are far too broad for one paragraph.'],
+  ['Which group of words is NOT a complete sentence?', 'Running down the hallway after lunch.', ['She ran down the hallway.', 'Run!', 'The bell rang after lunch.'], 'It has no subject and no main verb — it is a fragment. ("Run!" is a command with an understood subject, <i>you</i>.)'],
+  ['Which sentence would most likely be found in an encyclopedia article about owls?', 'Owls can turn their heads about 270 degrees.', ['Once upon a time, a wise owl lived in an oak tree.', 'I think owls are the coolest birds ever!', '"Hoot! Hoot!" said the little owl.'], 'Encyclopedias contain facts, not stories or opinions.'],
+  ['Choose the best way to combine the sentences.<div class="sent">The dog was tired. The dog was hungry.</div>', 'The dog was tired and hungry.', ['The dog was tired, the dog was hungry.', 'The dog was tired, and hungry was the dog.', 'Tired, the dog was, and hungry.'], 'Combine the two adjectives with <i>and</i> — short and clear.'],
+  ['Which sentence uses the underlined word correctly?', 'Everyone went on the trip <u>except</u> Jordan.', ['I <u>except</u> your apology.', 'Please <u>except</u> this gift.', 'She will <u>except</u> the award tonight.'], '<i>Except</i> means "but/other than." The others need <i>accept</i> (to receive).'],
+  ['Which sentence uses the underlined word correctly?', 'The cold weather will <u>affect</u> the crops.', ['The medicine had a strong <u>affect</u> on him.', 'The <u>affect</u> of the storm was terrible.', 'What <u>affect</u> did the movie have on you?'], '<i>Affect</i> is usually a verb; <i>effect</i> is usually a noun.'],
+  ['Choose the best topic sentence for a paragraph about why students should get more sleep.', 'Getting enough sleep helps students do better in school.', ['Some students like to stay up late.', 'My bedroom has blue curtains.', 'Many animals sleep during the day.'], 'A topic sentence states the main idea of the paragraph.'],
+  ['Which sentence does NOT belong in the paragraph?<div class="sent">(1) Honeybees live in large colonies. (2) Each colony has one queen bee. (3) Worker bees gather nectar and pollen. (4) My uncle is allergic to peanuts.</div>', 'Sentence 4', ['Sentence 1', 'Sentence 2', 'Sentence 3'], 'Sentence 4 is off topic — the paragraph is about honeybees.', ['Sentence 1', 'Sentence 2', 'Sentence 3', 'Sentence 4']],
+  ['Which sentence does NOT belong in the paragraph?<div class="sent">(1) Recycling helps protect the environment. (2) It reduces the amount of trash in landfills. (3) Pizza is my favorite food. (4) It also saves energy and natural resources.</div>', 'Sentence 3', ['Sentence 1', 'Sentence 2', 'Sentence 4'], 'Sentence 3 has nothing to do with recycling.', ['Sentence 1', 'Sentence 2', 'Sentence 3', 'Sentence 4']],
+  ['Choose the word that best completes the sentence.<div class="sent">Leo forgot his umbrella, ______ he got soaked on the way home.</div>', 'so', ['but', 'or', 'yet'], '<b>So</b> shows the result of forgetting the umbrella.'],
+];
+
+/* =========================================================
+   QUESTION GENERATORS
+   ========================================================= */
+// --- Spelling
+function spellHSPT(cat, sec = 'spelling') {
+  const ws = draw(poolFor(cat), 3);
+  const err = Math.random() < 0.78 ? rnd(0, 2) : 3;
+  const choices = ws.map((o, i) => esc(fillS(o.s, i === err ? o.x : o.w)));
+  choices.push('No mistake');
+  let explain;
+  if (err < 3) { const o = ws[err]; explain = `Sentence ${LET[err]} misspells <b>${o.x}</b>. Correct spelling: <span class="hl">${hl(o.w, o.cat)}</span>.<br><span class="small muted">${SPELL[o.cat].tip}</span>`; }
+  else explain = `No mistakes! All three words are spelled correctly: <span class="hl">${ws.map(o => hl(o.w, o.cat)).join(', ')}</span>.`;
+  return { sec, sub: 'spell', cat: err < 3 ? ws[err].cat : ws[0].cat, prompt: 'Look for errors in <b>spelling</b>. If there is no mistake, choose D.', choices, answer: err, explain };
+}
+function spellPickQ(o) {
+  return mc({ sec: 'spelling', sub: 'pick', cat: o.cat, prompt: `Choose the correct spelling to complete the sentence.<div class="sent">${esc(fillS(o.s, '________'))}</div>`, correct: o.w, wrong: [o.x, ...variants(o.w)], explain: `<span class="hl">${hl(o.w, o.cat)}</span><br><span class="small muted">${SPELL[o.cat].tip}</span>` });
+}
+function spellTypeQ(o) {
+  return { sec: 'spelling', sub: 'type', cat: o.cat, typed: true, word: o.w, sentence: fillS(o.s, '________'), prompt: 'Listen to the word, then type it.', explain: `<span class="hl">${hl(o.w, o.cat)}</span> — common mistake: <s>${o.x}</s><br><span class="small muted">${SPELL[o.cat].tip}</span>` };
+}
+
+// --- Verbal
+const synQ = r => mc({ sec: 'verbal', sub: 'syn', prompt: `<b>${cap(r[0])}</b> most nearly means`, correct: r[1], wrong: r.slice(2), explain: `<b>${r[0]}</b> means <b>${r[1]}</b>.` });
+const antQ = r => mc({ sec: 'verbal', sub: 'ant', prompt: `<b>${cap(r[0])}</b> means the opposite of`, correct: r[1], wrong: r.slice(2), explain: `The opposite of <b>${r[0]}</b> is <b>${r[1]}</b>. (Watch out for synonyms in the choices!)` });
+const anaQ = r => mc({ sec: 'verbal', sub: 'ana', prompt: r[0], correct: r[1], wrong: r.slice(2, 5), explain: r[5] });
+const clsQ = r => mc({ sec: 'verbal', sub: 'cls', prompt: 'Which word does <b>not</b> belong with the others?', correct: r[1], wrong: r[0].filter(w => w !== r[1]), explain: r[2] });
+const logicQ = r => ({ sec: 'verbal', sub: 'logic', prompt: `${r[0]}<br>${r[1]}<br>${r[2]}<br><br>If the first two statements are true, the third is`, choices: ['true', 'false', 'uncertain'], answer: r[3], explain: r[4] });
+
+// --- Quantitative: number series
+function seriesQ() {
+  const t = rnd(0, 7); let seq, rule, extra = [];
+  switch (t) {
+    case 0: { const s = rnd(1, 20), d = pick([2, 3, 4, 5, 6, 7, 8, 9, 11, 12]); seq = rep(6, 0).map((_, i) => s + i * d); rule = `add ${d} each time`; extra = [seq[5] + 1, seq[5] - d]; break; }
+    case 1: { const s = rnd(60, 99), d = pick([3, 4, 5, 6, 7, 8, 9]); seq = rep(6, 0).map((_, i) => s - i * d); rule = `subtract ${d} each time`; extra = [seq[5] + d * 2, seq[5] - 1]; break; }
+    case 2: { const s = pick([1, 2, 3, 4, 5]), r = pick([2, 3]), len = r === 2 ? 6 : 5; seq = rep(len, 0).map((_, i) => s * r ** i); rule = `multiply by ${r} each time`; const p = seq[len - 2]; extra = [p + (p - seq[len - 3]), p * 2 + r, seq[len - 1] / 2]; break; }
+    case 3: { const s = rnd(1, 10), d = rnd(1, 4), k = pick([1, 2]); seq = [s]; let diff = d; for (let i = 1; i < 6; i++) { seq.push(seq[i - 1] + diff); diff += k; } rule = `the amount added grows by ${k} each time (+${d}, +${d + k}, +${d + 2 * k}, …)`; extra = [seq[4] + (seq[4] - seq[3])]; break; }
+    case 4: { const a = rnd(3, 7), b = rnd(1, a - 1), s = rnd(1, 15); seq = [s]; for (let i = 1; i < 7; i++) seq.push(seq[i - 1] + (i % 2 ? a : -b)); rule = `alternate: add ${a}, then subtract ${b}`; extra = [seq[5] - b, seq[6] - a - b]; break; }
+    case 5: { const s1 = rnd(1, 10), d1 = rnd(2, 5), s2 = rnd(30, 50), d2 = rnd(2, 5); seq = []; for (let i = 0; i < 7; i++) seq.push(i % 2 ? s2 - ((i - 1) / 2) * d2 : s1 + (i / 2) * d1); rule = `two series are mixed together: the 1st, 3rd, 5th… numbers add ${d1}; the 2nd, 4th, 6th… numbers subtract ${d2}`; extra = [seq[5] - d2, seq[4] + d1 + 1]; break; }
+    case 6: { const o = pick([0, 1, -1]), st = rnd(1, 4); seq = rep(6, 0).map((_, i) => (st + i) ** 2 + o); rule = `square numbers${o ? (o > 0 ? ' plus 1' : ' minus 1') : ''} (${st}², ${st + 1}², ${st + 2}², …)`; extra = [seq[4] + (seq[4] - seq[3])]; break; }
+    case 7: { const a = pick([2, 3]), b = pick([1, 2, 3]), s = rnd(1, 4); seq = [s]; for (let i = 1; i < 6; i++) seq.push(i % 2 ? seq[i - 1] * a : seq[i - 1] + b); rule = `alternate: multiply by ${a}, then add ${b}`; extra = [seq[4] + b, seq[4] * a + b]; break; }
+  }
+  const blank = [0, 1, 2, 6].includes(t) && Math.random() < 0.3;
+  let shown, ans, prompt;
+  if (blank) {
+    const bi = rnd(2, seq.length - 2); ans = seq[bi];
+    shown = seq.map((v, i) => i === bi ? '____' : v).join(', ');
+    prompt = `Look at this series: <b>${shown}</b>. What number should fill the blank in the series?`;
+    extra = [ans + 1, ans - 1, seq[bi - 1] * 2];
+  } else {
+    ans = seq[seq.length - 1];
+    shown = seq.slice(0, -1).join(', ');
+    prompt = `Look at this series: <b>${shown}, …</b> What number should come next?`;
+  }
+  return mc({ sec: 'quant', sub: 'series', prompt, correct: ans, wrong: nd(ans, extra), explain: `The rule: ${rule}. Full series: ${seq.join(', ')}.` });
+}
+
+// --- Quantitative: comparisons
+const L3 = ['A', 'B', 'C'];
+function statementsFor(v) {
+  const eq = (x, y) => Math.abs(v[x] - v[y]) < 1e-9, gt = (x, y) => v[x] - v[y] > 1e-9;
+  const S = [], I = [0, 1, 2];
+  for (const x of I) for (const y of I) if (x !== y) {
+    S.push({ t: `(${L3[x]}) is greater than (${L3[y]})`, ok: gt(x, y), c: 0 });
+    if (x < y) S.push({ t: `(${L3[x]}) is equal to (${L3[y]})`, ok: eq(x, y), c: 0 });
+  }
+  S.push({ t: '(A), (B), and (C) are equal', ok: eq(0, 1) && eq(1, 2), c: 1 });
+  for (const x of I) for (const y of I) for (const z of I) if (x !== y && y !== z && x !== z)
+    S.push({ t: `(${L3[x]}) is greater than (${L3[y]}) and less than (${L3[z]})`, ok: gt(x, y) && gt(z, x), c: 1 });
+  for (const [x, y] of [[0, 1], [0, 2], [1, 2]]) {
+    const z = 3 - x - y;
+    S.push({ t: `(${L3[x]}) and (${L3[y]}) are equal, and both are greater than (${L3[z]})`, ok: eq(x, y) && gt(x, z), c: 1 });
+    S.push({ t: `(${L3[x]}) and (${L3[y]}) are equal, and both are less than (${L3[z]})`, ok: eq(x, y) && gt(z, x), c: 1 });
+  }
+  return S;
+}
+function compChoices(v) {
+  const S = statementsFor(v), T = S.filter(s => s.ok), F = S.filter(s => !s.ok);
+  const tc = T.filter(s => s.c);
+  const t = tc.length && Math.random() < 0.65 ? pick(tc) : pick(T);
+  const wrong = [...shuffle(F.filter(s => s.c)).slice(0, 2), ...shuffle(F.filter(s => !s.c)).slice(0, 1)];
+  return { correct: t.t, wrong: wrong.map(s => s.t) };
+}
+function valuePattern(pool) {
+  const p = pick(['d', 'd', 'two', 'two', 'all']);
+  const a = pick(pool); let b, c;
+  const other = x => { let y; do { y = pick(pool); } while (Math.abs(y - x) < 1e-9); return y; };
+  if (p === 'all') { b = a; c = a; }
+  else if (p === 'two') { b = a; c = other(a); }
+  else { b = other(a); do { c = pick(pool); } while (Math.abs(c - a) < 1e-9 || Math.abs(c - b) < 1e-9); }
+  return shuffle([a, b, c]);
+}
+function exprFor(v) {
+  const o = [];
+  if (v > 3) { const a = rnd(1, v - 1); o.push(`${a} + ${v - a}`); }
+  const b = rnd(2, 15); o.push(`${v + b} − ${b}`);
+  const divs = [2, 3, 4, 5, 6].filter(k => v % k === 0 && v / k > 1);
+  if (divs.length) {
+    const k = pick(divs); o.push(`${k} × ${v / k}`);
+    const q = v / k; if (q >= 3) { const x = rnd(1, q - 1); o.push(`(${x} + ${q - x}) × ${k}`); }
+  }
+  const k2 = rnd(2, 6); o.push(`${v * k2} ÷ ${k2}`);
+  const k3 = rnd(2, 5); o.push(`1/${k3} of ${v * k3}`);
+  [10, 20, 25, 50].forEach(p => { if ((v * 100) % p === 0 && v * 100 / p <= 200) o.push(`${p}% of ${v * 100 / p}`); });
+  if (v <= 15) o.push(`√${v * v}`);
+  const s = Math.floor(Math.sqrt(v)); if (s >= 2) o.push(v - s * s ? `${s}² + ${v - s * s}` : `${s}²`);
+  return pick(o);
+}
+function compQ() {
+  const v = valuePattern(isKid() ? [4, 5, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20] : [6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 24, 25, 30]);
+  const ex = v.map(isKid() ? kidExprFor : exprFor);
+  const { correct, wrong } = compChoices(v);
+  return mc({ sec: 'quant', sub: 'comp', prompt: `Examine (A), (B), and (C) and find the best answer.<div class="abc">${ex.map((e, i) => `<div>(${L3[i]}) &nbsp; ${e}</div>`).join('')}</div>`, correct, wrong, explain: `Work out each one: (A) = ${v[0]}, (B) = ${v[1]}, (C) = ${v[2]}.` });
+}
+// --- Quantitative: geometric comparison (SVG figures)
+const FRACS = [[1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [3, 8], [5, 8], [1, 6], [5, 6], [4, 9], [5, 12], [7, 12], [3, 16], [2, 5], [3, 5]];
+const GRIDS = [[2, 2], [2, 3], [3, 3], [2, 4], [3, 4], [4, 4], [2, 5], [2, 6]];
+function figureSVG(n, d, exact) {
+  let kinds = [];
+  GRIDS.forEach(([r, c]) => { if ((r * c) % d === 0) kinds.push({ k: 'grid', r, c, t: r * c }); });
+  for (let t = Math.max(2, d); t <= 12; t += d) kinds.push({ k: 'pie', t });
+  if (exact) kinds = kinds.filter(f => f.t === d).concat(d <= 6 ? [{ k: 'grid', r: 1, c: d, t: d }] : []);
+  const f = pick(kinds), sh = n * f.t / d;
+  const on = new Set(shuffle([...Array(f.t).keys()]).slice(0, sh));
+  const fillC = i => on.has(i) ? '#38bdf8' : '#1e293b';
+  let body = '';
+  if (f.k === 'grid') {
+    const cw = 90 / f.c, chh = 90 / f.r;
+    for (let i = 0; i < f.t; i++) { const x = 5 + (i % f.c) * cw, y = 5 + Math.floor(i / f.c) * chh; body += `<rect x="${x}" y="${y}" width="${cw}" height="${chh}" fill="${fillC(i)}" stroke="#cbd5e1" stroke-width="1.5"/>`; }
+  } else {
+    const R = 44, C = 50;
+    for (let i = 0; i < f.t; i++) {
+      const a1 = (i / f.t) * 2 * Math.PI - Math.PI / 2, a2 = ((i + 1) / f.t) * 2 * Math.PI - Math.PI / 2;
+      const p = (a) => `${(C + R * Math.cos(a)).toFixed(2)},${(C + R * Math.sin(a)).toFixed(2)}`;
+      body += `<path d="M${C},${C} L${p(a1)} A${R},${R} 0 0 1 ${p(a2)} Z" fill="${fillC(i)}" stroke="#cbd5e1" stroke-width="1.5"/>`;
+    }
+  }
+  return { svg: `<svg width="110" height="110" viewBox="0 0 100 100">${body}</svg>`, txt: `${sh}/${f.t}` + (fr(sh, f.t) !== `${sh}/${f.t}` ? ` = ${fr(sh, f.t)}` : '') };
+}
+function geoQ() {
+  const F = isKid() ? KID_FRACS : FRACS;
+  const vals = valuePattern(F.map(([n, d]) => n / d));
+  const figs = vals.map(v => { const [n, d] = F.find(([a, b]) => Math.abs(a / b - v) < 1e-9); return figureSVG(n, d); });
+  const { correct, wrong } = compChoices(vals);
+  return mc({ sec: 'quant', sub: 'geo', prompt: `Examine figures (A), (B), and (C). Compare the <b>fraction of each figure that is shaded</b>, and find the best answer.<div class="figs">${figs.map((f, i) => `<div>${f.svg}(${L3[i]})</div>`).join('')}</div>`, correct, wrong, explain: `Shaded parts: (A) ${figs[0].txt}, (B) ${figs[1].txt}, (C) ${figs[2].txt}.` });
+}
+// --- Quantitative: number manipulation
+function manipQ() {
+  const t = rnd(0, 7); let q, ans, exp, extra = [];
+  switch (t) {
+    case 0: { const k = pick([2, 3, 4, 5, 6]), m = k * rnd(3, 12), n = rnd(2, 15); ans = m / k + n; q = `What number is ${n} more than 1/${k} of ${m}?`; exp = `1/${k} of ${m} = ${m / k}; ${m / k} + ${n} = ${ans}.`; extra = [m / k - n, m + n, m / k]; break; }
+    case 1: { const a = rnd(3, 12), b = rnd(3, 12), n = rnd(2, Math.min(20, a * b - 1)); ans = a * b - n; q = `What number is ${n} less than the product of ${a} and ${b}?`; exp = `${a} × ${b} = ${a * b}; ${a * b} − ${n} = ${ans}.`; extra = [a * b + n, a + b - n, a * b]; break; }
+    case 2: { const k = rnd(2, 6), a = rnd(2, 10), b = rnd(2, 10); ans = k * (a + b); q = `What number divided by ${k} is equal to the sum of ${a} and ${b}?`; exp = `${a} + ${b} = ${a + b}; ${a + b} × ${k} = ${ans}.`; extra = [a + b, (a + b) + k, k * a + b]; break; }
+    case 3: { const k = pick([2, 3, 4, 5]), s = k * rnd(3, 10), a = rnd(1, s - 1), b = s - a; ans = s / k; q = `What number is 1/${k} of the sum of ${a} and ${b}?`; exp = `${a} + ${b} = ${s}; 1/${k} of ${s} = ${ans}.`; extra = [s, s * k, ans + k]; break; }
+    case 4: { const p = pick([10, 20, 25, 50]), base = pick([20, 40, 60, 80, 100, 120, 200]), n = rnd(2, 12); ans = p * base / 100 + n; q = `What number is ${n} more than ${p}% of ${base}?`; exp = `${p}% of ${base} = ${p * base / 100}; ${p * base / 100} + ${n} = ${ans}.`; extra = [p * base / 100, p + n, base + n]; break; }
+    case 5: { const a = rnd(3, 12), b = rnd(1, Math.min(30, a * a - 1)); ans = a * a - b; q = `What number is ${b} less than ${a} squared?`; exp = `${a}² = ${a * a}; ${a * a} − ${b} = ${ans}.`; extra = [a * 2 - b, a * a + b]; break; }
+    case 6: { const m = rnd(50, 90), n = rnd(3, 15); ans = m - 3 * n; q = `What number subtracted from ${m} leaves 3 times ${n}?`; exp = `3 × ${n} = ${3 * n}. ${m} − ? = ${3 * n}, so ? = ${m} − ${3 * n} = ${ans}.`; extra = [3 * n, m - n, m + 3 * n]; break; }
+    case 7: { const k = rnd(2, 6), a = k * rnd(1, 4), b = rnd(2, 9); ans = a * b / k; q = `What number multiplied by ${k} equals the product of ${a} and ${b}?`; exp = `${a} × ${b} = ${a * b}; ${a * b} ÷ ${k} = ${ans}.`; extra = [a * b, a * b * k, ans + k]; break; }
+  }
+  return mc({ sec: 'quant', sub: 'manip', prompt: q, correct: ans, wrong: nd(ans, extra), explain: exp });
+}
+
+// --- Mathematics
+const M = (prompt, correct, wrong, explain) => mc({ sec: 'math', sub: 'math', prompt, correct, wrong, explain });
+const $$ = v => '$' + Number(v).toFixed(2);
+const MATHG = [
+  () => { const p = pick([5, 10, 20, 25, 30, 40, 50, 75]), b = 20 * rnd(1, 15), a = p * b / 100; return M(`What is ${p}% of ${b}?`, a, nd(a, [p, a * 10, a / 10, b - a, a * 2]), `${p}% = ${p}/100, so ${p}/100 × ${b} = ${a}.`); },
+  () => { const ds = [2, 3, 4, 5, 6, 8, 10, 12], d1 = pick(ds), d2 = pick(ds), n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1); const L = d1 * d2 / gcd(d1, d2), a = n1 * L / d1, b = n2 * L / d2, c = fr(a + b, L); return M(`${n1}/${d1} + ${n2}/${d2} =`, c, [fr(n1 + n2, d1 + d2), fr(n1 + n2, L), fr(a + b + 1, L), fr(a + b - 1 || a + b + 2, L), fr(n1 * n2, d1 * d2), fr(a + b, 2 * L)], `Common denominator ${L}: ${a}/${L} + ${b}/${L} = ${a + b}/${L} = ${c}.`); },
+  () => { const a = rnd(2, 12), b = rnd(2, 9), c = rnd(2, 9), d = rnd(1, 9); const ans = a + b * c - d; return M(`${a} + ${b} × ${c} − ${d} =`, ans, nd(ans, [(a + b) * c - d, a + b * (c - d), (a + b) * (c - d)]), `Multiply first (PEMDAS): ${b} × ${c} = ${b * c}. Then ${a} + ${b * c} − ${d} = ${ans}.`); },
+  () => { const x = rnd(2, 12), a = rnd(2, 9), b = rnd(1, 20), c = a * x + b; return M(`If ${a}x + ${b} = ${c}, what is the value of x?`, x, nd(x, [(c + b) / a, c - b, c / a]), `Subtract ${b}: ${a}x = ${c - b}. Divide by ${a}: x = ${x}.`); },
+  () => { const l = rnd(4, 15), w = rnd(2, l - 1); return Math.random() < .5 ? M(`A rectangle is ${l} cm long and ${w} cm wide. What is its area?`, `${l * w} sq cm`, [`${2 * (l + w)} sq cm`, `${l + w} sq cm`, `${l * w + l} sq cm`], `Area = length × width = ${l} × ${w} = ${l * w}.`) : M(`A rectangle is ${l} cm long and ${w} cm wide. What is its perimeter?`, `${2 * (l + w)} cm`, [`${l * w} cm`, `${l + w} cm`, `${2 * l + w} cm`], `Perimeter = 2 × (${l} + ${w}) = ${2 * (l + w)}.`); },
+  () => { const b = 2 * rnd(2, 10), h = rnd(3, 12), a = b * h / 2; return M(`A triangle has a base of ${b} inches and a height of ${h} inches. What is its area?`, `${a} sq in`, [`${b * h} sq in`, `${b + h} sq in`, `${a + h} sq in`], `Area = ½ × base × height = ½ × ${b} × ${h} = ${a}.`); },
+  () => { const n = pick([4, 5]), m = rnd(10, 30); let xs = rep(n - 1, 0).map(() => m + rnd(-8, 8)); xs.push(m * n - xs.reduce((s, x) => s + x, 0)); if (xs[n - 1] <= 0) xs[n - 1] = m; const sum = xs.reduce((s, x) => s + x, 0), mean = sum / n; return M(`What is the average (mean) of ${xs.join(', ')}?`, mean, nd(mean, [sum, Math.max(...xs), mean + 1]), `Add them: ${sum}. Divide by ${n}: ${mean}.`); },
+  () => { const p = 20 * rnd(2, 10), pct = pick([10, 20, 25, 50]), off = p * pct / 100, sale = p - off; return M(`A jacket costs $${p}. It is on sale for ${pct}% off. What is the sale price?`, $$(sale), [$$(off), $$(p - pct), $$(sale + 5), $$(p), $$(sale - 5), $$(sale + 10)], `${pct}% of $${p} = $${off}. $${p} − $${off} = $${sale}.`); },
+  () => { const s = pick([30, 40, 45, 50, 55, 60, 65]), t = rnd(2, 6), d = s * t; return Math.random() < .5 ? M(`A car travels at ${s} miles per hour for ${t} hours. How far does it go?`, `${d} miles`, [`${s + t} miles`, `${d + s} miles`, `${d - s} miles`], `Distance = rate × time = ${s} × ${t} = ${d}.`) : M(`A train travels ${d} miles in ${t} hours. What is its average speed?`, `${s} mph`, [`${s + 5} mph`, `${d - t} mph`, `${s - 5} mph`], `Speed = distance ÷ time = ${d} ÷ ${t} = ${s}.`); },
+  () => { const a = rnd(2, 5), b = a === 2 ? rnd(3, 6) : rnd(2, 4), ans = a ** b; return M(`What is the value of ${a}<sup>${b}</sup>?`, ans, nd(ans, [a * b, a + b, a ** (b - 1), b ** a]), `${a}<sup>${b}</sup> means ${rep(b, 0).map(() => a).join(' × ')} = ${ans}.`); },
+  () => { const x = rnd(3, 12), y = rnd(2, 12); return M(`√${x * x} + √${y * y} =`, x + y, nd(x + y, [x * y, Math.round(Math.sqrt(x * x + y * y)), x * x + y * y]), `√${x * x} = ${x} and √${y * y} = ${y}; ${x} + ${y} = ${x + y}.`); },
+  () => { const r1 = rnd(1, 5), r2 = rnd(r1 + 1, 7), k = rnd(2, 8), tot = (r1 + r2) * k; return M(`The ratio of boys to girls in a club is ${r1}:${r2}. If there are ${tot} students, how many are girls?`, r2 * k, nd(r2 * k, [r1 * k, tot - r2, r2 * (k + 1)]), `${r1} + ${r2} = ${r2 + r1} parts. ${tot} ÷ ${r1 + r2} = ${k} per part. Girls = ${r2} × ${k} = ${r2 * k}.`); },
+  () => { const r = rnd(2, 10); return Math.random() < .5 ? M(`What is the area of a circle with a radius of ${r}?`, `${r * r}π`, [`${2 * r}π`, `${r}π`, `${2 * r * r}π`], `Area = πr² = π × ${r}² = ${r * r}π.`) : M(`What is the circumference of a circle with a radius of ${r}?`, `${2 * r}π`, [`${r * r}π`, `${r}π`, `${4 * r}π`], `Circumference = 2πr = 2 × π × ${r} = ${2 * r}π.`); },
+  () => { const a = rnd(2, 12), b = rnd(2, 15), c = rnd(2, 9), ans = -a + b + c; return M(`−${a} + ${b} − (−${c}) =`, ans, nd(ans, [-a + b - c, a + b + c, -ans, a + b - c], [1, -1, 2, -2]), `Subtracting a negative is adding: −${a} + ${b} + ${c} = ${ans}.`); },
+  () => { const a = rnd(2, 9), b = rnd(2, 9), ans = +(a * b / 100).toFixed(4); return M(`0.${a} × 0.${b} =`, ans, [+(a * b / 10).toFixed(3), +(a * b / 1000).toFixed(4), +((a + b) / 10).toFixed(2)], `${a} × ${b} = ${a * b}. Two decimal places total → ${ans}.`); },
+  () => { const a = rnd(30, 80), b = rnd(20, 150 - a), c = 180 - a - b; return M(`Two angles of a triangle measure ${a}° and ${b}°. What is the measure of the third angle?`, `${c}°`, [`${360 - a - b}°`, `${c + 10}°`, `${Math.abs(90 - c) || c + 20}°`], `The angles of a triangle add up to 180°: 180 − ${a} − ${b} = ${c}.`); },
+  () => { const a = rnd(15, 75); return Math.random() < .5 ? M(`What is the complement of a ${a}° angle?`, `${90 - a}°`, [`${180 - a}°`, `${a}°`, `${360 - a}°`], `Complementary angles add to 90°: 90 − ${a} = ${90 - a}.`) : M(`What is the supplement of a ${a}° angle?`, `${180 - a}°`, [`${90 - a}°`, `${a}°`, `${360 - a}°`], `Supplementary angles add to 180°: 180 − ${a} = ${180 - a}.`); },
+  () => { const g = rnd(2, 9), x = rnd(2, 7), y = pick([2, 3, 5, 7].filter(p => gcd(p, x) === 1 && p !== x)), A = g * x, B = g * y; return Math.random() < .5 ? M(`What is the greatest common factor (GCF) of ${A} and ${B}?`, g, nd(g, [A * B / g, x, y, 1, g * 2]), `${A} = ${g} × ${x}, ${B} = ${g} × ${y}. The GCF is ${g}.`) : M(`What is the least common multiple (LCM) of ${A} and ${B}?`, A * B / g, nd(A * B / g, [A * B, g, A + B]), `LCM = ${A} × ${B} ÷ GCF(${g}) = ${A * B / g}.`); },
+  () => { const t = rnd(0, 2); if (t === 0) { const f = rnd(2, 6); return M(`How many inches are in ${f} 1/2 feet?`, f * 12 + 6, nd(f * 12 + 6, [f * 12, f * 12 + 5, f * 10 + 5]), `${f} ft = ${f * 12} in, ½ ft = 6 in. Total ${f * 12 + 6}.`); } if (t === 1) { const y = rnd(2, 9); return M(`How many feet are in ${y} yards?`, y * 3, nd(y * 3, [y * 12, y * 36, y + 3]), `1 yard = 3 feet, so ${y} × 3 = ${y * 3}.`); } const h = rnd(1, 4); return M(`How many minutes are in ${h} 1/2 hours?`, h * 60 + 30, nd(h * 60 + 30, [h * 60 + 50, h * 100 + 50, h * 60]), `${h} h = ${h * 60} min, ½ h = 30 min. Total ${h * 60 + 30}.`); },
+  () => { const n = rnd(1000, 9999) + rnd(1, 99) / 100, r = Math.round(n / 100) * 100; return M(`Round ${fmt(n)} to the nearest hundred.`, fmt(r), [fmt(r + 100), fmt(r - 100), fmt(Math.round(n / 10) * 10)].filter(x => x !== fmt(r)).concat([fmt(Math.round(n / 1000) * 1000), fmt(Math.floor(n))]), `Look at the tens digit to decide. ${fmt(n)} rounds to ${fmt(r)}.`); },
+  () => { const m = rnd(5, 30), s = 3 * m; return M(`The sum of three consecutive integers is ${s}. What is the largest of the three?`, m + 1, nd(m + 1, [m, m - 1, m + 2]), `Middle number = ${s} ÷ 3 = ${m}. The integers are ${m - 1}, ${m}, ${m + 1}.`); },
+  () => { const c = pick([15, 25, 35, 45, 65, 75, 85]), n = rnd(3, 9), t = c * n / 100; return M(`Pencils cost $0.${c} each. How much do ${n} pencils cost?`, $$(t), [$$(t + c / 100), $$(t - c / 100), $$(c * n / 10)], `${n} × $0.${c} = $${t.toFixed(2)}.`); },
+  () => { const a = rnd(2, 5), b = rnd(1, 9), ans = 2 * a * a + b; return M(`If a = ${a} and b = ${b}, what is the value of 2a² + b?`, ans, nd(ans, [(2 * a) ** 2 + b, 2 * a + b, 2 * a * a * b]), `2 × ${a}² + ${b} = 2 × ${a * a} + ${b} = ${ans}.`); },
+  () => { const r = rnd(1, 6), b = rnd(2, 8), t = r + b; return M(`A bag holds ${r} red marbles and ${b} blue marbles. If one marble is picked without looking, what is the probability it is red?`, fr(r, t), [fr(b, t), `${r}/${b}`, fr(1, r + 1) === fr(r, t) ? `1/${t + 1}` : fr(1, r + 1)], `${r} red out of ${t} total = ${fr(r, t)}.`); },
+  () => { const s = rnd(3, 12); return M(`A square has an area of ${s * s} square feet. What is its perimeter?`, `${4 * s} ft`, [`${s} ft`, `${s * s / 2} ft`, `${2 * s} ft`], `Side = √${s * s} = ${s}. Perimeter = 4 × ${s} = ${4 * s}.`); },
+  () => { const n = rnd(2, 5), each = pick([1.25, 1.5, 2.25, 0.75]), k = rnd(n + 1, 9); return M(`If ${n} notebooks cost ${$$(n * each)}, how much do ${k} notebooks cost?`, $$(k * each), [$$(k * each + each), $$(n * each + k - n), $$((k - 1) * each)], `One notebook = ${$$(n * each)} ÷ ${n} = ${$$(each)}. ${k} × ${$$(each)} = ${$$(k * each)}.`); },
+  () => { const p = pick([10, 20, 25, 50, 75]), whole = pick([20, 40, 60, 80, 120]), part = whole * p / 100; return M(`${part} is what percent of ${whole}?`, `${p}%`, [`${p + 5}%`, `${Math.round(whole / part * 10)}%`, `${100 - p}%`], `${part} ÷ ${whole} = ${p / 100} = ${p}%.`); },
+  () => { const ds = [rnd(1, 9), rnd(0, 9), rnd(0, 9), rnd(0, 9), rnd(0, 9), rnd(0, 9), rnd(0, 9)]; const pos = rnd(1, 4), d = rnd(1, 9); ds[pos] = d; const num = +ds.join(''), val = d * 10 ** (6 - pos); return M(`What is the value of the digit ${d} in ${fmt(num)}?`, fmt(val), [fmt(val * 10), fmt(val / 10), String(d)].concat([fmt(val * 100)]), `The ${d} is in the ${['millions', 'hundred-thousands', 'ten-thousands', 'thousands', 'hundreds'][pos]} place, so its value is ${fmt(val)}.`); },
+  () => { const l = rnd(2, 8), w = rnd(2, 6), h = rnd(2, 6); return M(`What is the volume of a box that is ${l} cm long, ${w} cm wide, and ${h} cm high?`, `${l * w * h} cubic cm`, [`${l + w + h} cubic cm`, `${2 * (l * w + w * h + l * h)} cubic cm`, `${l * w} cubic cm`], `Volume = ${l} × ${w} × ${h} = ${l * w * h}.`); },
+  () => { const a = rnd(2, 9), e = rnd(2, 5); return M(`${a} × 10<sup>${e}</sup> =`, fmt(a * 10 ** e), [fmt(a * 10 ** (e - 1)), fmt(a * 10 ** (e + 1)), fmt(a * 10 * e)], `Move the decimal ${e} places to the right: ${fmt(a * 10 ** e)}.`); },
+];
+
+const usageQ = bad => {
+  const goods = draw(LANG_OK, 3), err = Math.random() < 0.8 ? rnd(0, 2) : 3;
+  const choices = goods.slice(); if (err < 3) choices[err] = esc(bad[0]).replace(/&lt;(\/?i)&gt;/g, '<$1>');
+  choices.push('No mistake');
+  return { sec: 'language', sub: 'usage', prompt: 'Look for errors in <b>capitalization, punctuation, or usage</b>. If there is no mistake, choose D.', choices, answer: err, explain: err < 3 ? `Sentence ${LET[err]} has the error. ${bad[1]}` : 'All three sentences are correct — no mistake!' };
+};
+const compoQ = r => r[4] ? { sec: 'language', sub: 'comp', prompt: r[0], choices: r[4], answer: r[4].indexOf(r[1]), explain: r[3] } : mc({ sec: 'language', sub: 'comp', prompt: r[0], correct: r[1], wrong: r[2], explain: r[3] });
+const vocabQ = r => mc({ sec: 'reading', sub: 'vocab', prompt: `Choose the word that means the same or about the same as the underlined word.<div class="sent">${r[0]}</div>`, correct: r[1], wrong: r.slice(2), explain: `<b>${r[0].match(/<u>(.*?)<\/u>/)[1]}</b> means <b>${r[1]}</b>.` });
+function passageQs(p) {
+  const html = `<h4>${p.title}</h4>${p.text.map(t => `<p>${esc(t)}</p>`).join('')}`;
+  return p.qs.map(r => mc({ sec: 'reading', sub: 'passage', passage: html, prompt: r[0], correct: r[1], wrong: r[2], explain: r[3] }));
+}
+
+function mix(n, subs, map) {
+  const keys = shuffle(subs.filter(s => map[s])); const counts = {};
+  keys.forEach(k => counts[k] = 0);
+  for (let i = 0; i < n; i++) counts[keys[i % keys.length]]++;
+  let out = []; for (const k of keys) if (counts[k]) out = out.concat(map[k](counts[k]));
+  return shuffle(out);
+}
+const GEN = {
+  verbal: (n, subs) => mix(n, subs, { syn: k => draw(SYN, k).map(synQ), ant: k => draw(ANT, k).map(antQ), ana: k => draw(ANA, k).map(anaQ), cls: k => draw(CLS, k).map(clsQ), logic: k => draw(LOGIC, k).map(logicQ) }),
+  quant: (n, subs) => mix(n, subs, { series: k => rep(k, isKid() ? kidSeriesQ : seriesQ), comp: k => rep(k, compQ), geo: k => rep(k, geoQ), manip: k => rep(k, isKid() ? kidManipQ : manipQ) }),
+  math: n => draw(isKid() ? KID_MATHG : MATHG, n).map(g => g()),
+  language: (n, subs) => mix(n, subs, { usage: k => draw(LANG_BAD, k).map(usageQ), comp: k => draw(COMPO, k).map(compoQ), spell: k => rep(k, () => spellHSPT('all', 'language')) }),
+  reading: (n, subs) => {
+    const wantP = subs.includes('passage'), wantV = subs.includes('vocab');
+    let pq = [];
+    if (wantP) { const np = wantV ? Math.max(1, Math.round(n * 0.6 / 6)) : Math.ceil(n / 6); draw(PASSAGES, np).forEach(p => pq = pq.concat(passageQs(p))); if (!wantV) pq = pq.slice(0, n); }
+    const nv = Math.max(0, n - pq.length);
+    return pq.concat(wantV ? draw(VOCAB, nv).map(vocabQ) : []);
+  },
+  spelling: (n, mode, cat) => mode === 'hspt' ? rep(n, () => spellHSPT(cat)) : draw(poolFor(cat), n).map(mode === 'pick' ? spellPickQ : spellTypeQ),
+};
+
+/* =========================================================
+   BIG BOY MODE (3rd grade) — same formats, easier content
+   ========================================================= */
+const KID = {
+  SPELL: {
+    double: {
+      name: 'Double Consonants', icon: '👯',
+      tip: 'Short vowel + one consonant? Double the consonant before adding <i>-ing</i> or <i>-ed</i>: hop → ho<b>pp</b>ing, stop → sto<b>pp</b>ed, swim → swi<b>mm</b>ing. Lots of words just have double letters in the middle, like ra<b>bb</b>it, ha<b>pp</b>y, and li<b>tt</b>le. Say the word slowly and listen for the short vowel!',
+      words: [
+        ['rabbit', 'rabit', 'The ___ hopped across the yard.'],
+        ['little', 'litle', 'My ___ sister is four years old.'],
+        ['happy', 'hapy', 'The puppy was ___ to see us.'],
+        ['running', 'runing', 'The kids were ___ on the playground.'],
+        ['stopped', 'stoped', 'The bus ___ at the corner.'],
+        ['swimming', 'swiming', 'We went ___ in the lake.'],
+        ['letter', 'leter', 'I wrote a ___ to my grandma.'],
+        ['kitten', 'kiten', 'The ___ played with a ball of yarn.'],
+        ['butter', 'buter', 'Please pass the ___ for my toast.'],
+        ['summer', 'sumer', 'We go to the beach every ___.'],
+        ['puppy', 'pupy', 'Our new ___ chewed my shoe.'],
+        ['balloon', 'baloon', 'The red ___ floated into the sky.'],
+        ['yellow', 'yelow', 'The sun is ___ in my drawing.'],
+        ['apple', 'aple', 'I packed an ___ in my lunch.'],
+        ['bottle', 'botle', 'Fill your water ___ before the game.'],
+        ['carrot', 'carot', 'The rabbit munched on a ___.'],
+        ['pillow', 'pilow', 'I sleep with a soft ___.'],
+        ['middle', 'midle', 'Sit in the ___ of the row.'],
+        ['funny', 'funy', 'The clown told a ___ joke.'],
+        ['getting', 'geting', 'It is ___ dark outside.'],
+        ['bigger', 'biger', 'An elephant is ___ than a horse.'],
+        ['dropped', 'droped', 'Oops! I ___ my ice cream.'],
+        ['shopping', 'shoping', 'Mom and I went ___ for new shoes.'],
+        ['clapped', 'claped', 'Everyone ___ at the end of the show.'],
+        ['grabbed', 'grabed', 'He ___ his coat and ran outside.'],
+        ['mitten', 'miten', 'I lost one ___ in the snow.'],
+        ['button', 'buton', 'Press the green ___ to start the game.'],
+        ['hammer', 'hamer', 'Dad used a ___ to fix the fence.'],
+        ['ladder', 'lader', 'The painter climbed up the ___.'],
+        ['hello', 'helo', 'Say ___ to your new teacher.'],
+        ['zipper', 'ziper', 'Pull the ___ up on your jacket.'],
+        ['dollar', 'dolar', 'This toy costs one ___.'],
+      ]
+    },
+    ance: {
+      name: '-ance vs. -ence', icon: '🎭',
+      tip: '<b>-ance</b> and <b>-ence</b> sound the same, so you have to remember which is which! Tricks: d<b>ance</b>, ch<b>ance</b> and gl<b>ance</b> rhyme with <i>pants</i>. F<b>ence</b> and s<b>e</b>nt<b>e</b>nc<b>e</b> are full of e\'s.',
+      words: [
+        ['dance', 'dence', 'We learned a new ___ in gym class.'],
+        ['chance', 'chence', 'Everyone gets a ___ to play.'],
+        ['glance', 'glence', 'Take a quick ___ at the clock.'],
+        ['fence', 'fance', 'The dog jumped over the ___.'],
+        ['sentence', 'sentance', 'Start each ___ with a capital letter.'],
+        ['distance', 'distence', 'We could see the mountains in the ___.'],
+        ['balance', 'balence', 'Can you ___ on one foot?'],
+        ['silence', 'silance', 'There was ___ when the movie started.'],
+        ['difference', 'differance', 'What is the ___ between 10 and 4?'],
+        ['entrance', 'entrence', 'Meet me at the ___ of the zoo.'],
+        ['allowance', 'allowence', 'I save my ___ in a piggy bank.'],
+        ['absence', 'absance', 'The teacher marked my ___ when I was sick.'],
+        ['science', 'sciance', 'In ___ class, we grew bean plants.'],
+        ['audience', 'audiance', 'The ___ clapped for the singers.'],
+        ['patience', 'patiance', 'Waiting in a long line takes ___.'],
+      ]
+    },
+    ie: {
+      name: 'ie vs. ei', icon: '👁️',
+      tip: '“<b>I before E, except after C</b>, or when it says “ay” like in n<b>ei</b>ghbor and w<b>ei</b>gh.” Tricky ones to remember: th<b>ei</b>r, <b>ei</b>ther, w<b>ei</b>rd. And a fr<b>ie</b>nd is a friend to the <b>end</b>!',
+      words: [
+        ['friend', 'freind', 'My best ___ sits next to me.'],
+        ['piece', 'peice', 'Can I have a ___ of cake?'],
+        ['field', 'feild', 'The cows ate grass in the ___.'],
+        ['chief', 'cheif', 'The fire ___ drove a red truck.'],
+        ['believe', 'beleive', 'I ___ you can do it!'],
+        ['thief', 'theif', 'The ___ took the cookies from the jar.'],
+        ['their', 'thier', 'The kids hung up ___ coats.'],
+        ['eight', 'ieght', 'A spider has ___ legs.'],
+        ['weigh', 'wiegh', 'How much does your puppy ___?'],
+        ['weight', 'wieght', 'The nurse checked my ___ and height.'],
+        ['neighbor', 'nieghbor', 'Our ___ has a big dog.'],
+        ['receive', 'recieve', 'Did you ___ my birthday card?'],
+        ['ceiling', 'cieling', 'A bug crawled across the ___.'],
+        ['either', 'iether', 'You can have ___ milk or juice.'],
+        ['weird', 'wierd', 'That bug looks really ___!'],
+        ['niece', 'neice', 'My aunt brought her ___ to the picnic.'],
+        ['shield', 'sheild', 'The knight held up his ___.'],
+        ['brief', 'breif', 'We took a ___ rest after the hike.'],
+        ['sleigh', 'sliegh', "Santa's ___ is pulled by reindeer."],
+        ['reindeer', 'riendeer', 'A ___ has big antlers.'],
+        ['veil', 'viel', 'The bride wore a long white ___.'],
+      ]
+    }
+  },
+  SYN: [
+    ['happy', 'glad', 'sad', 'angry', 'sleepy'], ['big', 'large', 'tiny', 'short', 'thin'], ['fast', 'quick', 'slow', 'loud', 'late'],
+    ['small', 'tiny', 'huge', 'tall', 'heavy'], ['begin', 'start', 'stop', 'end', 'finish'], ['shout', 'yell', 'whisper', 'sing', 'sleep'],
+    ['smart', 'clever', 'silly', 'lazy', 'tired'], ['scared', 'afraid', 'brave', 'happy', 'calm'], ['angry', 'mad', 'glad', 'kind', 'proud'],
+    ['shut', 'close', 'open', 'fix', 'push'], ['sleepy', 'tired', 'awake', 'hungry', 'busy'], ['easy', 'simple', 'hard', 'long', 'strange'],
+    ['gift', 'present', 'box', 'party', 'card'], ['story', 'tale', 'song', 'picture', 'game'], ['pretty', 'beautiful', 'ugly', 'plain', 'sharp'],
+    ['hurry', 'rush', 'wait', 'walk', 'rest'], ['chilly', 'cold', 'warm', 'sunny', 'windy'], ['jump', 'leap', 'sit', 'crawl', 'fall'],
+    ['sick', 'ill', 'well', 'strong', 'sad'], ['giggle', 'laugh', 'cry', 'frown', 'yawn'], ['huge', 'giant', 'tiny', 'round', 'soft'],
+    ['quiet', 'silent', 'noisy', 'loud', 'busy'], ['grab', 'take', 'drop', 'give', 'throw'], ['kind', 'nice', 'mean', 'rude', 'tall'],
+    ['damp', 'wet', 'dry', 'hot', 'dusty'], ['shiny', 'bright', 'dull', 'dirty', 'dark'],
+  ],
+  ANT: [
+    ['hot', 'cold', 'warm', 'sunny', 'fire'], ['up', 'down', 'over', 'top', 'high'], ['empty', 'full', 'open', 'clean', 'bare'],
+    ['wet', 'dry', 'damp', 'soaked', 'cold'], ['early', 'late', 'first', 'soon', 'quick'], ['loud', 'quiet', 'noisy', 'big', 'happy'],
+    ['open', 'closed', 'wide', 'door', 'free'], ['hard', 'soft', 'tough', 'heavy', 'strong'], ['light', 'dark', 'bright', 'sunny', 'lamp'],
+    ['sad', 'happy', 'unhappy', 'crying', 'tired'], ['young', 'old', 'little', 'baby', 'small'], ['fast', 'slow', 'quick', 'speedy', 'race'],
+    ['win', 'lose', 'victory', 'play', 'try'], ['push', 'pull', 'shove', 'press', 'kick'], ['top', 'bottom', 'up', 'peak', 'high'],
+    ['day', 'night', 'sun', 'week', 'morning'], ['always', 'never', 'often', 'forever', 'again'], ['give', 'take', 'share', 'gift', 'hand'],
+    ['float', 'sink', 'swim', 'boat', 'fly'], ['smooth', 'rough', 'soft', 'flat', 'shiny'], ['tall', 'short', 'high', 'big', 'long'],
+    ['before', 'after', 'first', 'early', 'soon'], ['laugh', 'cry', 'giggle', 'smile', 'joke'], ['whisper', 'shout', 'mumble', 'talk', 'hush'],
+  ],
+  ANA: [
+    ['Bird is to fly as fish is to', 'swim', 'water', 'scales', 'net', 'A bird flies; a fish swims.'],
+    ['Cat is to kitten as dog is to', 'puppy', 'bone', 'bark', 'leash', 'A baby cat is a kitten; a baby dog is a puppy.'],
+    ['Hot is to cold as day is to', 'night', 'sun', 'warm', 'morning', 'Hot/cold and day/night are opposites.'],
+    ['Shoe is to foot as hat is to', 'head', 'hair', 'coat', 'cap', 'You wear a shoe on your foot and a hat on your head.'],
+    ['Cow is to milk as hen is to', 'egg', 'farm', 'corn', 'barn', 'A cow gives milk; a hen lays eggs.'],
+    ['Big is to small as tall is to', 'short', 'high', 'giant', 'wide', 'Big/small and tall/short are opposites.'],
+    ['Pen is to write as scissors are to', 'cut', 'paper', 'sharp', 'draw', 'You write with a pen and cut with scissors.'],
+    ['Ear is to hear as eye is to', 'see', 'nose', 'glasses', 'smell', 'You hear with your ears and see with your eyes.'],
+    ['Book is to read as song is to', 'sing', 'music', 'radio', 'write', 'You read a book and sing a song.'],
+    ['Bee is to hive as bird is to', 'nest', 'fly', 'egg', 'feather', 'A bee lives in a hive; a bird lives in a nest.'],
+    ['Apple is to fruit as carrot is to', 'vegetable', 'orange', 'rabbit', 'garden', 'An apple is a fruit; a carrot is a vegetable.'],
+    ['Up is to down as in is to', 'out', 'on', 'under', 'inside', 'Up/down and in/out are opposites.'],
+    ['Glove is to hand as sock is to', 'foot', 'shoe', 'boot', 'leg', 'A glove goes on a hand; a sock goes on a foot.'],
+    ['Morning is to breakfast as evening is to', 'dinner', 'night', 'moon', 'lunch', 'You eat breakfast in the morning and dinner in the evening.'],
+    ['Brush is to paint as pencil is to', 'write', 'eraser', 'paper', 'sharp', 'You paint with a brush and write with a pencil.'],
+    ['Puppy is to dog as calf is to', 'cow', 'horse', 'farm', 'milk', 'A puppy grows into a dog; a calf grows into a cow.'],
+    ['Wet is to dry as full is to', 'empty', 'cup', 'more', 'fill', 'Wet/dry and full/empty are opposites.'],
+    ['Teacher is to school as doctor is to', 'hospital', 'nurse', 'sick', 'medicine', 'A teacher works at a school; a doctor works at a hospital.'],
+    ['Pig is to oink as cow is to', 'moo', 'farm', 'milk', 'quack', 'A pig says oink; a cow says moo.'],
+    ['Finger is to hand as toe is to', 'foot', 'nail', 'shoe', 'knee', 'Fingers are on your hand; toes are on your foot.'],
+  ],
+  CLS: [
+    [['red', 'blue', 'green', 'apple'], 'apple', 'The others are colors.'],
+    [['dog', 'cat', 'horse', 'carrot'], 'carrot', 'The others are animals.'],
+    [['apple', 'banana', 'grape', 'bread'], 'bread', 'The others are fruits.'],
+    [['car', 'bus', 'truck', 'bed'], 'bed', 'The others are things you ride in.'],
+    [['Monday', 'Friday', 'Sunday', 'March'], 'March', 'The others are days of the week; March is a month.'],
+    [['run', 'jump', 'hop', 'chair'], 'chair', 'The others are actions (verbs).'],
+    [['spoon', 'fork', 'knife', 'pillow'], 'pillow', 'The others are things you eat with.'],
+    [['shirt', 'pants', 'sock', 'table'], 'table', 'The others are clothes.'],
+    [['two', 'five', 'nine', 'green'], 'green', 'The others are numbers.'],
+    [['robin', 'eagle', 'owl', 'cat'], 'cat', 'The others are birds.'],
+    [['happy', 'glad', 'cheerful', 'sad'], 'sad', 'The others all mean happy.'],
+    [['piano', 'drum', 'guitar', 'book'], 'book', 'The others are musical instruments.'],
+    [['milk', 'juice', 'water', 'cookie'], 'cookie', 'The others are drinks.'],
+    [['summer', 'winter', 'spring', 'July'], 'July', 'The others are seasons; July is a month.'],
+    [['nose', 'eyes', 'mouth', 'shoe'], 'shoe', 'The others are parts of your face.'],
+    [['circle', 'square', 'triangle', 'pencil'], 'pencil', 'The others are shapes.'],
+  ],
+  LOGIC: [
+    ['Max is taller than Sam.', 'Sam is taller than Leo.', 'Max is taller than Leo.', 0, 'Max > Sam > Leo, so Max is taller than Leo — true.'],
+    ['All birds have feathers.', 'A robin is a bird.', 'A robin has feathers.', 0, 'Every bird has feathers, and a robin is a bird — true.'],
+    ['Ann has more toys than Ben.', 'Ben has more toys than Cara.', 'Cara has the most toys.', 1, 'Ann has the most and Cara has the fewest — false.'],
+    ['The red ball is bigger than the blue ball.', 'The green ball is bigger than the red ball.', 'The blue ball is the smallest.', 0, 'Green > red > blue. Blue is the smallest — true.'],
+    ['Jake is older than Mia.', 'Jake is older than Zoe.', 'Mia is older than Zoe.', 2, 'We know Jake is oldest, but Mia and Zoe are never compared — uncertain.'],
+    ['All cats have whiskers.', 'Fluffy is a cat.', 'Fluffy has whiskers.', 0, 'Every cat has whiskers, and Fluffy is a cat — true.'],
+    ['The dog is faster than the cat.', 'The cat is faster than the turtle.', 'The turtle is faster than the dog.', 1, 'Dog > cat > turtle. The turtle is the slowest — false.'],
+    ['Lily ate more grapes than Tom.', 'Tom ate more grapes than Sue.', 'Sue ate the most grapes.', 1, 'Lily ate the most and Sue ate the fewest — false.'],
+    ['Some kids in my class have a dog.', 'Owen is in my class.', 'Owen has a dog.', 2, 'Only some kids have a dog. Owen might or might not — uncertain.'],
+    ['Monday was hotter than Tuesday.', 'Wednesday was hotter than Tuesday.', 'Monday was hotter than Wednesday.', 2, 'Both were hotter than Tuesday, but we never compare Monday and Wednesday — uncertain.'],
+    ['Every pencil in the box is yellow.', 'I took a pencil from the box.', 'My pencil is yellow.', 0, 'All the pencils in the box are yellow — true.'],
+    ['No fish can walk.', 'A goldfish is a fish.', 'A goldfish can walk.', 1, 'No fish can walk, so a goldfish cannot walk — false.'],
+  ],
+  PASSAGES: [
+    {
+      title: "Lola's Wiggly Tooth",
+      text: [
+        'Lola had a wiggly tooth. It had been loose for a whole week. She wiggled it with her tongue during math. She wiggled it with her finger at lunch. But it would not come out.',
+        'At dinner, Dad made corn on the cob. Lola took a big bite. Crunch! Something felt different. She looked down, and there was her tooth, stuck in the corn!',
+        '"I did it!" Lola shouted. She put the tooth in a little box under her pillow. The next morning, she found a shiny coin and a tiny note that said, "Great job, Lola!"'
+      ],
+      qs: [
+        ['What was Lola\'s problem at the beginning?', 'Her tooth was loose but would not come out.', ['She did not like corn.', 'She lost her pillow.', 'She was late for school.'], 'The story begins with her wiggly tooth that would not come out.'],
+        ['How did Lola\'s tooth finally come out?', 'She bit into corn on the cob.', ['Dad pulled it out.', 'She wiggled it at lunch.', 'It fell out at school.'], 'She took a big bite of corn and the tooth was stuck in it.'],
+        ['In the story, the word <i>loose</i> means', 'not tight', ['shiny', 'broken', 'hungry'], 'A loose tooth is not tight — it wiggles.'],
+        ['How did Lola feel when her tooth came out?', 'excited', ['scared', 'sad', 'angry'], 'She shouted, "I did it!" — she was excited.'],
+        ['What did Lola find under her pillow?', 'a coin and a note', ['her tooth', 'an ear of corn', 'a new toy'], 'She found "a shiny coin and a tiny note."'],
+      ]
+    },
+    {
+      title: 'Busy Bees',
+      text: [
+        'Honeybees are small insects, but they do a very big job. They live together in a home called a hive. One hive can hold thousands of bees!',
+        'Worker bees fly from flower to flower. They drink a sweet juice called nectar. They carry it back to the hive, where they turn it into honey.',
+        'As bees visit flowers, a yellow powder called pollen sticks to their fuzzy bodies. When they fly to the next flower, some pollen rubs off. This helps the flowers make seeds so new plants can grow.',
+        'When a bee finds lots of flowers, it does a special "waggle dance" to show the other bees which way to fly.'
+      ],
+      qs: [
+        ['Where do honeybees live?', 'in a hive', ['in a hole in the ground', 'inside flowers', 'in a cave'], 'Paragraph 1: "a home called a hive."'],
+        ['What is nectar?', 'a sweet juice in flowers', ['a yellow powder', 'a kind of bee', 'a bee\'s home'], 'Paragraph 2: "a sweet juice called nectar."'],
+        ['How do bees help flowers?', 'They carry pollen from flower to flower.', ['They water the flowers.', 'They eat bugs on the flowers.', 'They pick the flowers.'], 'Pollen rubs off on the next flower, which helps flowers make seeds.'],
+        ['Why do bees do the "waggle dance"?', 'to show other bees where the flowers are', ['to stay warm', 'to scare away birds', 'to make honey'], 'The last paragraph says the dance shows "which way to fly."'],
+        ['This passage is mostly about', 'how honeybees live and work', ['how to plant a garden', 'why flowers are yellow', 'a bee who gets lost'], 'Every paragraph tells about what honeybees do.'],
+      ]
+    },
+    {
+      title: 'The Lemonade Stand',
+      text: [
+        'Sam and Ava wanted to earn money for a new soccer ball. "Let\'s have a lemonade stand!" said Ava. They squeezed lemons, stirred in sugar, and made a big sign.',
+        'On Saturday morning, they set up their stand. But just as their first customer walked up, dark clouds rolled in. Soon it was pouring rain. Nobody wanted cold lemonade on such a gloomy day.',
+        'Sam had an idea. "Let\'s sell hot cocoa instead!" Mom helped them warm up some milk. Before long, neighbors with umbrellas were lining up for warm cups of cocoa. By the end of the day, Sam and Ava had enough money for their soccer ball.'
+      ],
+      qs: [
+        ['Why did Sam and Ava want to earn money?', 'to buy a new soccer ball', ['to buy more lemons', 'to buy an umbrella', 'to give it to Mom'], 'The first sentence tells us: "money for a new soccer ball."'],
+        ['What problem did Sam and Ava have?', 'It started to rain.', ['They had no lemons.', 'Mom said no.', 'Their sign fell down.'], 'Dark clouds rolled in and it started pouring rain.'],
+        ['How did they solve their problem?', 'They sold hot cocoa instead.', ['They went home.', 'They gave the lemonade away.', 'They waited for the sun.'], 'Sam\'s idea was to sell hot cocoa.'],
+        ['In the story, the word <i>gloomy</i> means', 'dark and rainy', ['sunny', 'hot', 'exciting'], 'A gloomy day is dark and dreary, like a rainy day.'],
+        ['What lesson can we learn from this story?', 'When plans change, think of a new idea.', ['Never sell lemonade.', 'Rain is always fun.', 'Soccer is better than cocoa.'], 'Sam and Ava did not give up — they came up with a new plan.'],
+      ]
+    },
+    {
+      title: 'Penguins',
+      text: [
+        'Penguins are birds, but they cannot fly. Instead, their wings work like flippers to help them swim. Some penguins can swim faster than a person can ride a bike!',
+        'Most penguins live in the southern half of the world. Some live in icy Antarctica, but others live on warm, sunny beaches. A thick layer of fat and tightly packed feathers keep penguins warm in cold water.',
+        'Emperor penguins have a special way to take care of their eggs. The father penguin holds the egg on top of his feet and covers it with a warm flap of skin. He keeps it safe for about two months while the mother goes to the sea to find food.'
+      ],
+      qs: [
+        ['Penguins use their wings to', 'swim', ['fly', 'dig', 'build nests'], 'Their wings "work like flippers to help them swim."'],
+        ['What keeps penguins warm in cold water?', 'fat and tightly packed feathers', ['sitting in the sun', 'their eggs', 'swimming fast'], 'Paragraph 2: "A thick layer of fat and tightly packed feathers…"'],
+        ['Who keeps the emperor penguin egg warm?', 'the father', ['the mother', 'the grandparents', 'no one'], 'The father holds the egg on his feet.'],
+        ['Which sentence is true, based on the passage?', 'Some penguins live where it is warm.', ['All penguins live in Antarctica.', 'Penguins can fly.', 'Penguins are fish.'], 'Some penguins "live on warm, sunny beaches."'],
+        ['The author wrote this passage to', 'teach facts about penguins', ['tell a funny story', 'sell penguin toys', 'show how to draw a penguin'], 'The passage is full of facts — it is meant to teach.'],
+      ]
+    }
+  ],
+  VOCAB: [
+    ['a <u>huge</u> elephant', 'big', 'small', 'gray', 'fast'], ['a <u>quick</u> rabbit', 'fast', 'slow', 'white', 'sleepy'],
+    ['a <u>damp</u> towel', 'wet', 'dry', 'soft', 'clean'], ['<u>shout</u> for help', 'yell', 'whisper', 'wait', 'run'],
+    ['a <u>tiny</u> ant', 'small', 'big', 'red', 'busy'], ['a big <u>grin</u>', 'smile', 'frown', 'yawn', 'bite'],
+    ['a <u>chilly</u> morning', 'cold', 'hot', 'early', 'sunny'], ['a <u>brave</u> firefighter', 'fearless', 'scared', 'tired', 'tall'],
+    ['an <u>enormous</u> whale', 'giant', 'little', 'blue', 'friendly'], ['<u>glad</u> to see you', 'happy', 'sad', 'sorry', 'afraid'],
+    ['<u>toss</u> the ball', 'throw', 'catch', 'hold', 'kick'], ['a <u>silent</u> room', 'quiet', 'noisy', 'dark', 'empty'],
+    ['a <u>weary</u> hiker', 'tired', 'happy', 'lost', 'strong'], ['<u>sprint</u> to the bus', 'run', 'walk', 'crawl', 'drive'],
+    ['a <u>gentle</u> breeze', 'soft', 'strong', 'cold', 'loud'], ['<u>repair</u> the bike', 'fix', 'ride', 'break', 'wash'],
+    ['<u>sob</u> loudly', 'cry', 'laugh', 'sing', 'snore'], ['a <u>clever</u> fox', 'smart', 'silly', 'slow', 'hungry'],
+    ['a <u>filthy</u> shirt', 'dirty', 'clean', 'new', 'striped'], ['<u>begin</u> the race', 'start', 'end', 'win', 'watch'],
+  ],
+  LANG_BAD: [
+    ['my dog likes to play fetch.', 'The first word of a sentence starts with a capital letter: <b>My</b>.'],
+    ['Yesterday i went to the park.', 'The word <b>I</b> is always a capital letter.'],
+    ['We have art class on monday.', 'Days of the week start with a capital letter: <b>Monday</b>.'],
+    ['Where is my backpack.', 'A question ends with a <b>question mark</b>.'],
+    ['She have a red bike.', 'With <i>she</i>, use <b>has</b>.'],
+    ['The cats is sleeping on the bed.', '<i>Cats</i> means more than one, so use <b>are</b>.'],
+    ['I goed to the store with Mom.', 'The past tense of <i>go</i> is <b>went</b>.'],
+    ['He runned all the way home.', 'The past tense of <i>run</i> is <b>ran</b>.'],
+    ['I saw a elephant at the zoo.', 'Use <b>an</b> before a word that starts with a vowel sound: <b>an elephant</b>.'],
+    ['Me and Sam played tag.', 'Say <b>Sam and I</b> played tag.'],
+    ['There are three mouses in the barn.', 'More than one mouse is <b>mice</b>.'],
+    ['My friend lives in texas.', 'Names of states start with a capital letter: <b>Texas</b>.'],
+    ['We ate pizza for dinner', 'A telling sentence ends with a <b>period</b>.'],
+    ['The boy dont like peas.', 'Use <b>doesn\'t</b> with <i>the boy</i> — and don\'t forget the apostrophe!'],
+    ['She is more taller than her brother.', 'Just say <b>taller</b> — not "more taller."'],
+    ['I has two brothers.', 'With <i>I</i>, use <b>have</b>.'],
+    ['My birthday is in june.', 'Months start with a capital letter: <b>June</b>.'],
+    ['The childs played outside.', 'More than one child is <b>children</b>.'],
+    ['We was late for the bus.', 'With <i>we</i>, use <b>were</b>.'],
+    ['Dr. smith checked my ears.', 'People\'s names start with a capital letter: <b>Smith</b>.'],
+    ['He catched the ball.', 'The past tense of <i>catch</i> is <b>caught</b>.'],
+    ['I has a new lunchbox.', 'With <i>I</i>, use <b>have</b>.'],
+  ],
+  LANG_OK: [
+    'My dog likes to chase the ball.', 'On Saturday, we went to the zoo.', 'Can you help me find my shoe?',
+    'Emma and I built a sandcastle.', 'The children ran to the playground.', 'We had pancakes for breakfast.',
+    'My cousin lives in Florida.', 'He caught the ball with both hands.', 'The birds are singing in the tree.',
+    'I saw an owl last night.', 'Mr. Brown is our music teacher.', 'Halloween is in October.',
+    'She has a new puppy.', 'The mice ran under the porch.', 'We were happy to see Grandma.',
+    'Do you like apples or bananas?', 'Wow, that was a great game!', 'My brother and I share a room.',
+    'The leaves fall in autumn.', 'They went swimming at the lake.', 'I have two pet fish.',
+  ],
+  COMPO: [
+    ['Choose the word that best completes the sentence.<div class="sent">I wanted to play outside, ______ it was raining.</div>', 'but', ['and', 'so', 'because'], '<b>But</b> shows that something got in the way.'],
+    ['Choose the word that best completes the sentence.<div class="sent">I was hungry, ______ I ate a snack.</div>', 'so', ['but', 'or', 'because'], '<b>So</b> tells what happened because you were hungry.'],
+    ['Choose the word that best completes the sentence.<div class="sent">We stayed inside ______ it was snowing.</div>', 'because', ['but', 'or', 'and'], '<b>Because</b> tells the reason.'],
+    ['Which is a complete sentence?', 'The dog barked at the mailman.', ['The big brown dog.', 'Running in the park.', 'After school today.'], 'A complete sentence tells <i>who</i> and <i>what they did</i>.'],
+    ['Which word comes first in ABC order?', 'bread', ['brick', 'bring', 'brown'], 'They all start with "br," so look at the third letter: br<b>e</b>ad comes before br<b>i</b>ck, br<b>i</b>ng and br<b>o</b>wn.'],
+    ['Which sentence would fit best in a story about a trip to the beach?', 'We built a sandcastle by the waves.', ['I put on my mittens.', 'The snowman melted.', 'We raked the leaves.'], 'Sandcastles and waves belong at the beach.'],
+    ['Which sentence does NOT belong?<div class="sent">(1) Dogs make great pets. (2) They are loyal and friendly. (3) My favorite color is blue. (4) Dogs love to play fetch.</div>', 'Sentence 3', ['Sentence 1', 'Sentence 2', 'Sentence 4'], 'Sentence 3 is not about dogs.', ['Sentence 1', 'Sentence 2', 'Sentence 3', 'Sentence 4']],
+    ['Which is the best title for a story about a girl who learns to ride a bike?', 'Lily Learns to Ride', ['My Favorite Food', 'The Rainy Day', 'A Trip to the Moon'], 'The title should tell what the story is about.'],
+    ['Choose the word that best completes the sentence.<div class="sent">Yesterday, Sam ______ to the store.</div>', 'went', ['go', 'goes', 'going'], '<i>Yesterday</i> means the past, so use <b>went</b>.'],
+    ['Which word is a noun (a person, place, or thing)?', 'kitten', ['jump', 'happy', 'quickly'], 'A kitten is a thing (an animal), so it is a noun.'],
+    ['Which word is a verb (an action word)?', 'run', ['chair', 'blue', 'soft'], '<b>Run</b> is something you do.'],
+    ['Which word is an adjective (a describing word)?', 'fluffy', ['dog', 'run', 'under'], '<b>Fluffy</b> describes what something is like.'],
+  ],
+};
+const HSPT_PACK = { SPELL, SYN, ANT, ANA, CLS, LOGIC, PASSAGES, VOCAB, LANG_BAD, LANG_OK, COMPO };
+const isKid = () => MODE === 'kid';
+function applyPack() {
+  ({ SPELL, SYN, ANT, ANA, CLS, LOGIC, PASSAGES, VOCAB, LANG_BAD, LANG_OK, COMPO } = isKid() ? KID : HSPT_PACK);
+  buildAllW();
+}
+
+// --- Big Boy quantitative
+function kidSeriesQ() {
+  const t = rnd(0, 5); let seq, rule, extra = [];
+  switch (t) {
+    case 0: { const s = rnd(1, 20), d = rnd(2, 10); seq = rep(6, i => s + i * d); rule = `add ${d} each time`; extra = [seq[5] + 1, seq[5] - d]; break; }
+    case 1: { const d = rnd(2, 5), s = d * rnd(8, 12) + rnd(0, d - 1); seq = rep(6, i => s - i * d); rule = `subtract ${d} each time`; extra = [seq[5] - 1, seq[5] + d]; break; }
+    case 2: { const d = pick([5, 10, 25, 100]), s = d * rnd(0, 4); seq = rep(6, i => s + i * d); rule = `skip count by ${d}s`; extra = [seq[5] + 1, seq[5] - d]; break; }
+    case 3: { const s = pick([1, 2, 3]); seq = rep(5, i => s * 2 ** i); rule = 'double the number each time'; extra = [seq[3] + seq[3] - seq[2], seq[4] + 2]; break; }
+    case 4: { const a = rnd(2, 5), b = rnd(1, a - 1), s = rnd(1, 10); seq = [s]; for (let i = 1; i < 7; i++) seq.push(seq[i - 1] + (i % 2 ? a : -b)); rule = `add ${a}, then subtract ${b}, and keep repeating`; extra = [seq[5] - b]; break; }
+    case 5: { const s = rnd(1, 10); seq = [s]; for (let i = 1; i < 6; i++) seq.push(seq[i - 1] + i); rule = 'add 1, then 2, then 3, then 4… (add one more each time)'; extra = [seq[4] + 4]; break; }
+  }
+  let ans, prompt;
+  if (t <= 3 && Math.random() < 0.3) {
+    const bi = rnd(2, seq.length - 2); ans = seq[bi];
+    prompt = `Look at this series: <b>${seq.map((v, i) => i === bi ? '____' : v).join(', ')}</b>. What number should fill the blank?`;
+    extra = [ans + 1, ans - 1];
+  } else {
+    ans = seq[seq.length - 1];
+    prompt = `Look at this series: <b>${seq.slice(0, -1).join(', ')}, …</b> What number should come next?`;
+  }
+  return mc({ sec: 'quant', sub: 'series', prompt, correct: ans, wrong: nd(ans, extra), explain: `The rule: ${rule}. Full series: ${seq.join(', ')}.` });
+}
+function kidExprFor(v) {
+  const o = [];
+  const a = rnd(1, v - 1); o.push(`${a} + ${v - a}`);
+  const b = rnd(2, 10); o.push(`${v + b} − ${b}`);
+  const fs = [2, 3, 4, 5].filter(k => v % k === 0 && v / k <= 10 && v / k > 1);
+  if (fs.length) { const k = pick(fs); o.push(`${k} × ${v / k}`); }
+  const k2 = rnd(2, 5); o.push(`${v * k2} ÷ ${k2}`);
+  if (v <= 10) o.push(`half of ${v * 2}`);
+  return pick(o);
+}
+const KID_FRACS = [[1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [1, 6], [1, 8], [3, 8]];
+function kidManipQ() {
+  const t = rnd(0, 5); let q, ans, exp, extra = [];
+  switch (t) {
+    case 0: { const a = rnd(3, 20), n = rnd(2, 9); ans = a + n; q = `What number is ${n} more than ${a}?`; exp = `${a} + ${n} = ${ans}.`; extra = [a - n, ans + 1]; break; }
+    case 1: { const a = rnd(10, 30), n = rnd(2, 9); ans = a - n; q = `What number is ${n} less than ${a}?`; exp = `${a} − ${n} = ${ans}.`; extra = [a + n, ans - 1]; break; }
+    case 2: { const a = rnd(2, 9), b = rnd(2, 9), n = rnd(2, 9); ans = a + b + n; q = `What number is ${n} more than the sum of ${a} and ${b}?`; exp = `${a} + ${b} = ${a + b}; ${a + b} + ${n} = ${ans}.`; extra = [a + b, a + b - n]; break; }
+    case 3: { const a = 2 * rnd(2, 10), n = rnd(1, 9); ans = a / 2 + n; q = `What number is ${n} more than half of ${a}?`; exp = `Half of ${a} is ${a / 2}; ${a / 2} + ${n} = ${ans}.`; extra = [a + n, a / 2]; break; }
+    case 4: { const a = rnd(2, 6), b = rnd(2, 6), n = rnd(1, a * b - 1); ans = a * b - n; q = `What number is ${n} less than ${a} times ${b}?`; exp = `${a} × ${b} = ${a * b}; ${a * b} − ${n} = ${ans}.`; extra = [a * b + n, a + b - n, a * b]; break; }
+    case 5: { const a = rnd(2, 8), b = rnd(2, 8); ans = 2 * (a + b); q = `What number is double the sum of ${a} and ${b}?`; exp = `${a} + ${b} = ${a + b}; double ${a + b} is ${ans}.`; extra = [a + b, 2 * a + b]; break; }
+  }
+  return mc({ sec: 'quant', sub: 'manip', prompt: q, correct: ans, wrong: nd(ans, extra), explain: exp });
+}
+
+// --- Big Boy math (3rd grade)
+const NAMES = ['Mia', 'Sam', 'Leo', 'Ava', 'Noah', 'Emma', 'Liam', 'Zoe', 'Owen', 'Lily'];
+const clock = t => { let h = Math.floor(t / 60) % 12; if (h === 0) h = 12; return `${h}:${String(t % 60).padStart(2, '0')}`; };
+const dur = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h > 1 ? 's' : ''}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
+const cents = c => c >= 100 ? '$' + (c / 100).toFixed(2) : c + '¢';
+const KID_MATHG = [
+  () => { const a = rnd(125, 689), b = rnd(117, 299), s = a + b, nc = +String(a).padStart(3, '0').split('').map((d, i) => (+d + +String(b).padStart(3, '0')[i]) % 10).join(''); return M(`${a} + ${b} =`, s, nd(s, [nc, s + 10, s - 10, s + 100]), `Add the ones, then the tens, then the hundreds. Remember to carry (regroup)! ${a} + ${b} = ${s}.`); },
+  () => { const a = rnd(400, 999), b = rnd(100, a - 50), d = a - b, nb = +String(a).split('').map((x, i) => Math.abs(+x - +String(b)[i])).join(''); return M(`${a} − ${b} =`, d, nd(d, [nb, d + 10, d - 10, a + b]), `Subtract the ones, tens, then hundreds — borrow (regroup) when the top digit is smaller. ${a} − ${b} = ${d}.`); },
+  () => { const a = rnd(2, 10), b = rnd(2, 10); return M(`${a} × ${b} =`, a * b, nd(a * b, [a + b, a * (b + 1), a * (b - 1), (a + 1) * b]), `${a} groups of ${b} = ${a * b}.`); },
+  () => { const a = rnd(2, 10), b = rnd(2, 10); return M(`${a * b} ÷ ${a} =`, b, nd(b, [a, b + 1, b - 1, a * b - a]), `${a} × ${b} = ${a * b}, so ${a * b} ÷ ${a} = ${b}.`); },
+  () => { const a = rnd(3, 15), b = rnd(3, 15); return M(`What number goes in the blank?<div class="sent">____ + ${a} = ${a + b}</div>`, b, nd(b, [a + b + a, a, b + 1]), `${a + b} − ${a} = ${b}.`); },
+  () => { const a = rnd(2, 9), b = rnd(2, 9); return M(`What number goes in the blank?<div class="sent">${a} × ____ = ${a * b}</div>`, b, nd(b, [a * b - a, a, b + 1]), `${a} × ${b} = ${a * b}.`); },
+  () => { const n = pick(NAMES), t = rnd(25, 60), g = rnd(6, t - 5); return M(`${n} had ${t} stickers. ${n} gave ${g} stickers to a friend. How many stickers does ${n} have now?`, t - g, nd(t - g, [t + g, t - g + 10, t - g - 1]), `${t} − ${g} = ${t - g}.`); },
+  () => { const b = rnd(12, 48), g = rnd(12, 48); return M(`There are ${b} boys and ${g} girls at the park. How many children are there in all?`, b + g, nd(b + g, [Math.abs(b - g), b + g + 10, b + g - 10]), `${b} + ${g} = ${b + g}.`); },
+  () => { const a = rnd(2, 9), b = rnd(2, 9); return M(`There are ${a} bags. Each bag has ${b} apples. How many apples are there in all?`, a * b, nd(a * b, [a + b, a * b + b, a * b - a]), `${a} × ${b} = ${a * b}.`); },
+  () => { const a = rnd(2, 6), b = rnd(2, 9); return M(`${a * b} cookies are shared equally among ${a} friends. How many cookies does each friend get?`, b, nd(b, [a, a * b - a, b + 2]), `${a * b} ÷ ${a} = ${b}.`); },
+  () => { const n = pick(NAMES), bx = rnd(2, 5), e = rnd(4, 10), x = rnd(1, 9), t = bx * e + x; return M(`${n} has ${bx} boxes with ${e} crayons in each box, plus ${x} extra crayons. How many crayons does ${n} have in all?`, t, nd(t, [bx + e + x, bx * e, bx * (e + x)]), `${bx} × ${e} = ${bx * e}; ${bx * e} + ${x} = ${t}.`); },
+  () => { const q = rnd(0, 3), d = rnd(0, 4), k = rnd(0, 3), p = rnd(1, 4), c = 25 * q + 10 * d + 5 * k + p; const coins = [[q, 'quarter'], [d, 'dime'], [k, 'nickel'], [p, 'penny']].filter(x => x[0]).map(([n, w]) => `${n} ${n > 1 ? (w === 'penny' ? 'pennies' : w + 's') : w}`).join(', '); return M(`How much money is ${coins}?`, cents(c), [cents(c + 5), cents(c - 5 > 0 ? c - 5 : c + 15), cents(c + 10), cents(q + d + k + p)], `Quarters are 25¢, dimes 10¢, nickels 5¢, pennies 1¢. Total: ${cents(c)}.`); },
+  () => { const s = rnd(1, 11) * 60 + 5 * rnd(0, 11), add = pick([10, 15, 20, 30, 45, 60]), e = s + add; return M(`It is ${clock(s)}. What time will it be in ${dur(add)}?`, clock(e), [clock(e + 5), clock(e - 10), clock(s + 60 + (add === 60 ? 15 : 0)), clock(e + 60)], `Count forward ${dur(add)} from ${clock(s)} to get ${clock(e)}.`); },
+  () => { const s = rnd(1, 10) * 60 + 15 * rnd(0, 3), d = pick([30, 45, 60, 75, 90, 120]); return M(`A movie starts at ${clock(s)} and ends at ${clock(s + d)}. How long is the movie?`, dur(d), [dur(d + 15), dur(d - 15 || 15) === dur(d) ? dur(d + 30) : dur(d - 15 || 15), dur(d + 60)], `From ${clock(s)} to ${clock(s + d)} is ${dur(d)}.`); },
+  () => { const ds = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 4), pos = rnd(0, 3), dg = ds[pos], val = dg * 10 ** (3 - pos); return M(`What is the value of the digit ${dg} in ${fmt(+ds.join(''))}?`, fmt(val), [fmt(val * 10), String(dg), fmt(val / 10 >= 1 ? val / 10 : val * 100), fmt(val * 100)], `The ${dg} is in the ${['thousands', 'hundreds', 'tens', 'ones'][pos]} place, so it is worth ${fmt(val)}.`); },
+  () => { if (Math.random() < .5) { let n = rnd(11, 989); if (n % 10 === 0) n += rnd(1, 9); const r = Math.round(n / 10) * 10; return M(`Round ${n} to the nearest ten.`, r, nd(r, [r + 10, r - 10, Math.round(n / 100) * 100], [10, -10, 20]), `Look at the ones digit: 5 or more rounds up, 4 or less rounds down. ${n} → ${r}.`); } let n = rnd(110, 989); if (n % 100 === 0) n += rnd(11, 89); const r = Math.round(n / 100) * 100; return M(`Round ${n} to the nearest hundred.`, r, nd(r, [r + 100, r - 100, Math.round(n / 10) * 10], [100, -100, 200]), `Look at the tens digit: 5 or more rounds up. ${n} → ${r}.`); },
+  () => { const d = pick([2, 3, 4, 6, 8]), n = rnd(1, d - 1), f = figureSVG(n, d, true); return M(`What fraction of the shape is shaded?<div class="figs"><div>${f.svg}</div></div>`, `${n}/${d}`, [`${d - n}/${d}`, `${n}/${d + 1}`, `${n + 1}/${d}`, `${d}/${n}`], `${n} of the ${d} equal parts are shaded, so the fraction is ${n}/${d}.`); },
+  () => { if (Math.random() < .5) { const d = pick([4, 5, 6, 8, 10]), ns = shuffle(rep(d - 1, i => i + 1)).slice(0, 4), mx = Math.max(...ns); return M('Which fraction is the largest?', `${mx}/${d}`, ns.filter(x => x !== mx).map(x => `${x}/${d}`), `All the pieces are the same size (${d}ths), so the one with the most pieces is biggest: ${mx}/${d}.`); } const ds = shuffle([2, 3, 4, 6, 8]).slice(0, 4), mn = Math.min(...ds); return M('Which fraction is the largest?', `1/${mn}`, ds.filter(x => x !== mn).map(x => `1/${x}`), `With 1 piece each, fewer pieces means bigger pieces. 1/${mn} is the largest.`); },
+  () => { const dg = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 3), ps = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]].map(p => +p.map(i => dg[i]).join('')), opts = shuffle(ps).slice(0, 4), mx = Math.max(...opts); return M('Which number is the greatest?', mx, opts.filter(x => x !== mx), `Compare the hundreds digits first, then the tens. ${mx} is the greatest.`); },
+  () => { const ev = shuffle([12, 18, 24, 30, 36, 44, 50, 66, 78, 92]).slice(0, 3), od = pick([15, 21, 27, 33, 47, 59, 63, 85, 91]); return M('Which number is odd?', od, ev, `Odd numbers end in 1, 3, 5, 7 or 9. ${od} ends in ${od % 10}.`); },
+  () => { const [sm, bg, f] = pick([['inches', 'foot', 12], ['minutes', 'hour', 60], ['days', 'week', 7], ['months', 'year', 12], ['hours', 'day', 24], ['feet', 'yard', 3]]), k = rnd(2, 5); return M(`How many ${sm} are in ${k} ${bg === 'foot' ? 'feet' : bg + 's'}?`, f * k, nd(f * k, [f + k, f * (k + 1), f]), `There are ${f} ${sm} in 1 ${bg}. ${k} × ${f} = ${f * k}.`); },
+  () => { const l = rnd(3, 12), w = rnd(2, l); return M(`A rectangle is ${l} inches long and ${w} inches wide. What is its perimeter?`, `${2 * (l + w)} inches`, [`${l * w} inches`, `${l + w} inches`, `${2 * l + w} inches`, `${2 * (l + w) + 2} inches`], `Perimeter means add all 4 sides: ${l} + ${w} + ${l} + ${w} = ${2 * (l + w)}.`); },
+  () => { const l = rnd(2, 9), w = rnd(2, 6); return M(`A rug is ${l} feet long and ${w} feet wide. What is its area?`, `${l * w} square feet`, [`${2 * (l + w)} square feet`, `${l + w} square feet`, `${l * w + l} square feet`, `${l * w + w} square feet`, `${l * w + 2} square feet`], `Area = length × width = ${l} × ${w} = ${l * w} square feet.`); },
+];
+
+/* =========================================================
+   SECTIONS / CONFIG
+   ========================================================= */
+const SECTIONS = {
+  verbal: { name: 'Verbal Skills', icon: '🧠', pace: 16, desc: 'Synonyms, antonyms, analogies, logic, classification', subs: { syn: 'Synonyms', ant: 'Antonyms', ana: 'Analogies', logic: 'Logic', cls: 'Classification' } },
+  quant: { name: 'Quantitative Skills', icon: '🔢', pace: 35, desc: 'Number series, comparisons, number manipulation', subs: { series: 'Number Series', comp: 'Comparisons', geo: 'Geometric Comparison', manip: 'Number Manipulation' } },
+  reading: { name: 'Reading', icon: '📖', pace: 30, desc: 'Passages & vocabulary', subs: { passage: 'Comprehension', vocab: 'Vocabulary' } },
+  math: { name: 'Mathematics', icon: '📐', pace: 42, desc: 'Concepts & problem solving', subs: null },
+  language: { name: 'Language', icon: '✍️', pace: 25, desc: 'Usage, mechanics, spelling, composition', subs: { usage: 'Usage & Mechanics', spell: 'Spelling', comp: 'Composition' } },
+};
+const SPELL_MODES = {
+  hspt: { name: 'HSPT Style', icon: '📝', desc: 'Find the sentence with the spelling error — just like the real test.' },
+  pick: { name: 'Spell Sprint', icon: '⚡', desc: 'Pick the correct spelling from four look-alikes.' },
+  type: { name: 'Hear & Spell', icon: '🔊', desc: 'Listen to the word and type it. The ultimate challenge!' },
+};
+const PACE = { verbal: 16, quant: 35, reading: 30, math: 42, language: 25, spelling: 25 };
+const pace = sec => (PACE[sec] || 30) * (isKid() ? 2 : 1);
+
+/* =========================================================
+   PROFILE / PERSISTENCE
+   ========================================================= */
+let MODE = (() => { try { return localStorage.getItem('hsptQuest_mode') === 'kid' ? 'kid' : 'hspt'; } catch (e) { return 'hspt'; } })();
+const LSK = () => MODE === 'kid' ? 'hsptQuest_kid_v1' : 'hsptQuest_v1';
+const defaultP = () => ({ name: '', xp: 0, badges: [], best: {}, sec: {}, cat: {}, history: [], mistakes: [], days: [], bestStreak: 0, muted: false, fixed: 0, done: [], answered: 0 });
+const loadP = () => { try { return Object.assign(defaultP(), JSON.parse(localStorage.getItem(LSK()) || '{}')); } catch (e) { return defaultP(); } };
+let P = loadP();
+const save = () => { try { localStorage.setItem(LSK(), JSON.stringify(P)); } catch (e) { } };
+applyPack();
+function switchMode() {
+  if (screen === 'quiz' && Q && !Q.done && !confirm('Leave this quiz? Your progress in it will be lost.')) return;
+  if (Q && Q.timer) clearInterval(Q.timer);
+  Q = null; MODE = isKid() ? 'hspt' : 'kid';
+  try { localStorage.setItem('hsptQuest_mode', MODE); } catch (e) { }
+  applyPack(); P = loadP(); SU = {};
+  document.body.classList.toggle('kid', isKid());
+  screen = 'home'; renderHeader(); renderHome(); window.scrollTo(0, 0);
+  toast(isKid() ? '🚀 Big Boy Mode on!' : '🎓 HSPT Mode on!');
+}
+const TITLES = ['Rookie', 'Apprentice', 'Learner', 'Scholar', 'Achiever', 'Ace', 'Expert', 'Master', 'Grandmaster', 'Legend'];
+const lvl = xp => { let n = 1; while (xp >= 50 * n * (n + 1)) n++; return n; };
+const title = n => TITLES[Math.min(n - 1, TITLES.length - 1)];
+const today = () => new Date().toLocaleDateString('en-CA');
+function dayStreak() {
+  const set = new Set(P.days); let d = new Date(), n = 0;
+  if (!set.has(today())) d.setDate(d.getDate() - 1);
+  while (set.has(d.toLocaleDateString('en-CA'))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+const qkey = q => q.typed ? 'T:' + q.word : q.prompt + '|' + q.choices.join('|');
+
+const BADGES = [
+  { id: 'first', i: '🎯', n: 'First Steps', d: 'Finish your first quiz' },
+  { id: 'perfect', i: '💎', n: 'Flawless', d: 'Score 100% on a quiz of 10+ questions' },
+  { id: 'streak10', i: '🔥', n: 'On Fire', d: 'Get 10 correct in a row' },
+  { id: 'streak25', i: '☄️', n: 'Unstoppable', d: 'Get 25 correct in a row' },
+  { id: 'bee', i: '🐝', n: 'Spelling Bee', d: 'Score 90%+ on a 20+ question spelling quiz' },
+  { id: 'double', i: '👯', n: 'Double Trouble', d: 'Get 50 double-consonant words right' },
+  { id: 'ance', i: '🎭', n: 'Ance or Ence?', d: 'Get 50 -ance/-ence words right' },
+  { id: 'ie', i: '👁️', n: 'I Before E', d: 'Get 50 ie/ei words right' },
+  { id: 'round', i: '🌐', n: 'Well-Rounded', d: 'Finish a quiz in all 5 HSPT sections' },
+  { id: 'mock', i: '🏫', n: 'Exam Ready', d: 'Complete a Mock Mini-Exam' },
+  { id: 'mock80', i: '🏆', n: 'Honor Roll', d: 'Score 80%+ on a Mock Mini-Exam' },
+  { id: 'speed', i: '⚡', n: 'Beat the Clock', d: 'Score 80%+ on a timed quiz' },
+  { id: 'comeback', i: '🔁', n: 'Comeback Kid', d: 'Fix 10 questions in Mistake Review' },
+  { id: 'days3', i: '📅', n: 'Habit Builder', d: 'Practice on 3 different days' },
+  { id: 'days7', i: '🗓️', n: 'Dedicated', d: 'Practice on 7 different days' },
+  { id: 'q500', i: '📚', n: 'Bookworm', d: 'Answer 500 questions' },
+  { id: 'xp1000', i: '🎓', n: 'Scholar', d: 'Earn 1,000 XP' },
+  { id: 'xp5000', i: '👑', n: 'HSPT Legend', d: 'Earn 5,000 XP' },
+];
+
+/* =========================================================
+   SOUND / FX
+   ========================================================= */
+let actx;
+function beep(freqs, dur = 0.12, type = 'sine', vol = 0.12) {
+  if (P.muted) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    let t = actx.currentTime;
+    freqs.forEach(f => { const o = actx.createOscillator(), g = actx.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur); o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur); t += dur * 0.8; });
+  } catch (e) { }
+}
+const sfx = { ok: () => beep([660, 880]), no: () => beep([220, 160], 0.18, 'square', 0.05), up: () => beep([523, 659, 784, 1047], 0.15), done: () => beep([392, 523, 659], 0.15) };
+function toast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
+function xpFloat(txt, el) { const r = el ? el.getBoundingClientRect() : { left: innerWidth / 2, top: innerHeight / 2, width: 0 }; const d = document.createElement('div'); d.className = 'xpfloat'; d.textContent = txt; d.style.left = (r.left + r.width - 60) + 'px'; d.style.top = (r.top) + 'px'; document.body.appendChild(d); setTimeout(() => d.remove(), 1000); }
+function confetti() {
+  const c = $('#confetti'), x = c.getContext('2d'); c.width = innerWidth; c.height = innerHeight;
+  const cols = ['#38bdf8', '#fbbf24', '#22c55e', '#a78bfa', '#f472b6', '#ef4444'];
+  const ps = rep(160, 0).map(() => ({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * 0.5, vx: (Math.random() - .5) * 4, vy: 2 + Math.random() * 4, r: 4 + Math.random() * 5, c: pick(cols), a: Math.random() * 6 }));
+  let f = 0; (function step() { x.clearRect(0, 0, c.width, c.height); ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.a += 0.1; x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.fillStyle = p.c; x.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6); x.restore(); }); if (f++ < 200) requestAnimationFrame(step); else x.clearRect(0, 0, c.width, c.height); })();
+}
+function speak(text) {
+  if (!('speechSynthesis' in window)) return false;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.rate = 0.85; u.lang = 'en-US';
+  speechSynthesis.speak(u); return true;
+}
+
+/* =========================================================
+   RENDERING: HEADER & HOME
+   ========================================================= */
+function renderHeader() {
+  const n = lvl(P.xp), base = 50 * (n - 1) * n, need = 100 * n, pct = Math.min(100, (P.xp - base) / need * 100);
+  $('#hdr').innerHTML = `
+    <div class="logo" onclick="go('home')">${isKid() ? 'Big Boy <span>Quest 🚀</span>' : 'HSPT <span>Prep Quest</span>'}</div>
+    <div class="pill click mode" onclick="switchMode()" title="Switch between HSPT and Big Boy (3rd grade) mode — each has its own profile">${isKid() ? '🧒 Big Boy Mode' : '🎓 HSPT Mode'} <span class="small muted">⇄ switch</span></div>
+    <div class="pill click" onclick="go('stats')" title="Level progress">⭐ Lv ${n} · ${title(n)} <div class="xpbar"><div style="width:${pct}%"></div></div> <span class="small muted">${fmt(P.xp)} XP</span></div>
+    <div class="pill" title="Days in a row">🔥 ${dayStreak()} day${dayStreak() === 1 ? '' : 's'}</div>
+    <div class="pill click" onclick="go('stats')" title="Badges">🏅 ${P.badges.length}/${BADGES.length}</div>
+    <div class="pill click" onclick="P.muted=!P.muted;save();renderHeader()" title="Sound">${P.muted ? '🔇' : '🔊'}</div>`;
+}
+let screen = 'home';
+function go(s, arg) {
+  if (Q && Q.timer) { clearInterval(Q.timer); Q.timer = null; }
+  if (s !== 'results' && s !== 'quiz' && Q && !Q.done && screen === 'quiz' && !confirm('Leave this quiz? Your progress in it will be lost.')) { startTimer(); return; }
+  screen = s; renderHeader(); window.scrollTo(0, 0);
+  ({ home: renderHome, setup: renderSetup, spelling: renderSpelling, stats: renderStats, rules: renderRules, quiz: renderQuiz, results: renderResults })[s](arg);
+}
+const bestTag = k => P.best[k] != null ? `<span class="best">Best ${P.best[k]}%</span>` : '';
+function renderHome() {
+  const greet = P.name ? `Welcome back, <b>${esc(P.name)}</b>! 👋` : '';
+  $('#app').innerHTML = `
+    ${!P.name ? `<div class="card" style="margin-bottom:16px"><h2>${isKid() ? 'Welcome to Big Boy Mode! 🚀' : 'Welcome to HSPT Prep Quest! 🎓'}</h2><p class="muted">What should we call you?</p><div class="row"><input class="name" id="nm" placeholder="Your name" maxlength="20" onkeydown="if(event.key==='Enter')setName()"><button class="btn" onclick="setName()">Let's go!</button></div></div>` : `<h2 style="margin-bottom:4px">${greet}</h2><p class="muted" style="margin-top:0">Pick a section to practice. Earn XP, keep your streak alive, and unlock badges!</p>`}
+    <div class="grid" style="margin-bottom:14px">
+      <div class="card tile feature" onclick="go('spelling')">${bestTag('spelling-hspt')}<div class="ic">🐝</div><h3>Spelling Lab</h3><div class="muted small">Double consonants · -ance/-ence · ie/ei<br>3 game modes</div></div>
+      <div class="card tile mock" onclick="startMock()">${bestTag('mock')}<div class="ic">🏫</div><h3>${isKid() ? 'Big Boy Practice Test' : 'Mock Mini-Exam'}</h3><div class="muted small">${isKid() ? '41 questions from all 5 sections, with a kid-friendly timer' : '42 questions from all 5 sections, timed at real HSPT pace'}</div></div>
+      <div class="card tile" onclick="startMistakes()"><div class="ic">🔁</div><h3>Mistake Review</h3><div class="muted small">${P.mistakes.length ? `<b style="color:var(--gold)">${P.mistakes.length}</b> question${P.mistakes.length === 1 ? '' : 's'} to fix. Get them right to clear them!` : 'No mistakes saved yet. Nice!'}</div></div>
+    </div>
+    <h3 style="margin:18px 0 10px">HSPT Sections</h3>
+    <div class="grid">
+      ${Object.entries(SECTIONS).map(([k, s]) => `<div class="card tile" onclick="go('setup','${k}')">${bestTag(k)}<div class="ic">${s.icon}</div><h3>${s.name}</h3><div class="muted small">${s.desc}</div></div>`).join('')}
+      <div class="card tile" onclick="go('stats')"><div class="ic">📊</div><h3>Stats & Badges</h3><div class="muted small">See your progress and trophies</div></div>
+    </div>
+    <p class="muted small" style="margin-top:24px">Tip: Use keys <kbd>A</kbd>–<kbd>D</kbd> (or <kbd>1</kbd>–<kbd>4</kbd>) to answer and <kbd>Enter</kbd> for the next question.</p>`;
+  if (!P.name) setTimeout(() => $('#nm') && $('#nm').focus(), 50);
+}
+function setName() { const v = $('#nm').value.trim(); if (!v) return; P.name = v; save(); go('home'); }
+
+/* =========================================================
+   SETUP SCREENS
+   ========================================================= */
+let SU = {};
+function chips(field, opts, multi) {
+  return `<div class="chips">${opts.map(([v, l]) => { const on = multi ? SU[field].includes(v) : SU[field] === v; return `<button class="chip ${on ? 'on' : ''}" onclick="setSU('${field}',${JSON.stringify(v).replace(/"/g, '&quot;')},${!!multi})">${l}</button>`; }).join('')}</div>`;
+}
+function setSU(f, v, multi) {
+  if (multi) { const a = SU[f]; const i = a.indexOf(v); if (i >= 0) { if (a.length > 1) a.splice(i, 1); } else a.push(v); }
+  else SU[f] = v;
+  screen === 'spelling' ? renderSpelling(true) : renderSetup(SU.sec, true);
+}
+const commonOpts = () => `
+  <div class="lab">Number of questions</div>${chips('n', [[10, '10'], [20, '20'], [30, '30']])}
+  <div class="lab">Feedback</div>${chips('feedback', [['instant', '✅ After each question (practice)'], ['end', '📋 At the end (test style)']])}
+  <div class="lab">Timer</div>${chips('timed', [[false, '😌 Relaxed'], [true, '⏱️ Timed at HSPT pace']])}`;
+function renderSetup(sec, keep) {
+  const s = SECTIONS[sec];
+  if (!keep || SU.sec !== sec) SU = { sec, n: 10, feedback: 'instant', timed: false, subs: s.subs ? Object.keys(s.subs) : [] };
+  $('#app').innerHTML = `<div class="card">
+    <div class="row"><div style="font-size:40px">${s.icon}</div><div><h2>${s.name}</h2><div class="muted">${s.desc}</div></div></div><br>
+    ${s.subs ? `<div class="lab">Question types</div>${chips('subs', Object.entries(s.subs), true)}` : ''}
+    ${commonOpts()}
+    ${SU.timed ? `<p class="muted small">⏱️ You'll get ${pace(sec)} seconds per question on average (${Math.round(SU.n * pace(sec) / 60)} min total) — ${isKid() ? 'double the HSPT time, just right for Big Boy mode' : 'about the real HSPT pace'}.</p>` : ''}
+    <div class="row"><button class="btn sec" onclick="go('home')">← Back</button><span class="sp"></span><button class="btn good" onclick="startSection()">Start ▶</button></div></div>`;
+}
+function renderSpelling(keep) {
+  if (!keep || SU.sec !== 'spelling') SU = { sec: 'spelling', mode: 'hspt', cat: 'all', n: 10, feedback: 'instant', timed: false };
+  const cs = P.cat;
+  const acc = k => cs[k] && cs[k].t ? Math.round(cs[k].c / cs[k].t * 100) + '%' : '—';
+  $('#app').innerHTML = `<div class="card">
+    <div class="row"><div style="font-size:40px">🐝</div><div><h2>Spelling Lab</h2><div class="muted">${isKid() ? 'Practice three tricky spelling patterns.' : 'Master the three trickiest spelling patterns on the HSPT.'}</div></div><span class="sp"></span><button class="btn sec" onclick="go('rules')">📘 Spelling Rules</button></div><br>
+    <div class="lab">Game mode</div>
+    <div class="grid" style="margin:8px 0 16px">${Object.entries(SPELL_MODES).map(([k, m]) => `<div class="card tile ${SU.mode === k ? 'feature' : ''}" style="padding:14px" onclick="setSU('mode','${k}')">${bestTag('spelling-' + k)}<div class="ic" style="font-size:28px">${m.icon}</div><h3>${m.name}</h3><div class="muted small">${m.desc}</div></div>`).join('')}</div>
+    <div class="lab">Focus</div>${chips('cat', [['all', '🌈 All patterns'], ['double', `👯 Double consonants (${acc('double')})`], ['ance', `🎭 -ance / -ence (${acc('ance')})`], ['ie', `👁️ ie / ei (${acc('ie')})`]])}
+    ${commonOpts()}
+    ${SU.mode === 'type' && !('speechSynthesis' in window) ? '<p style="color:var(--gold)">⚠️ Your browser does not support speech. You will see the sentence with a blank instead.</p>' : ''}
+    <div class="row"><button class="btn sec" onclick="go('home')">← Back</button><span class="sp"></span><button class="btn good" onclick="startSpelling()">Start ▶</button></div></div>`;
+}
+function renderKidRules() {
+  const ex = (cat, n) => SPELL[cat].words.slice(0, n).map(([w]) => `<span class="hl">${hl(w, cat)}</span>`).join(', ');
+  $('#app').innerHTML = `<div class="card rule">
+    <h2>📘 Spelling Tricks</h2>
+    <h3>👯 Double Letters</h3><ul>
+      <li><b>Short vowel + one consonant → double it</b> before <i>-ing</i>, <i>-ed</i>, or <i>-er</i>: hop → ho<b>pp</b>ing, stop → sto<b>pp</b>ed, big → bi<b>gg</b>er, swim → swi<b>mm</b>ing.</li>
+      <li><b>Long vowel or silent e → don't double</b>: hope → hoping, bake → baked.</li>
+      <li>Say the word in parts — ra<b>b</b>·<b>b</b>it, ha<b>p</b>·<b>p</b>y, ki<b>t</b>·<b>t</b>en. You can hear a letter on each side!</li>
+      <li class="muted">Examples: ${ex('double', 12)}</li></ul>
+    <h3>🎭 -ance or -ence?</h3><ul>
+      <li>They sound the same, so you have to remember which one each word uses.</li>
+      <li><b>-ance:</b> d<b>ance</b>, ch<b>ance</b>, gl<b>ance</b>, dist<b>ance</b>, bal<b>ance</b>, entr<b>ance</b>. (Dance, chance, glance — they rhyme with <i>pants</i>!)</li>
+      <li><b>-ence:</b> f<b>ence</b>, sent<b>ence</b>, sil<b>ence</b>, differ<b>ence</b>, sci<b>ence</b>. (Sentence has three e's!)</li></ul>
+    <h3>👁️ ie or ei?</h3><ul>
+      <li><b>"I before E</b> — fr<b>ie</b>nd, p<b>ie</b>ce, f<b>ie</b>ld, ch<b>ie</b>f,</li>
+      <li><b>except after C</b> — rec<b>ei</b>ve, c<b>ei</b>ling,</li>
+      <li><b>or when it says "ay"</b> like n<b>ei</b>ghbor and w<b>ei</b>gh" — <b>ei</b>ght, sl<b>ei</b>gh, r<b>ei</b>ndeer, v<b>ei</b>l.</li>
+      <li>Tricky ones: th<b>ei</b>r, <b>ei</b>ther, w<b>ei</b>rd (it's a weird word!).</li>
+      <li>A fr<b>ie</b>nd is a friend to the <b>end</b>.</li></ul>
+    <h3>📝 How the spelling test questions work</h3><ul>
+      <li>You see three sentences (A, B, C) and choice D, "No mistake." Find the sentence with a word spelled wrong.</li>
+      <li>Read every word slowly. Sometimes nothing is wrong, and then the answer is D!</li></ul>
+    <div class="row"><button class="btn sec" onclick="go('spelling')">← Spelling Lab</button><span class="sp"></span><button class="btn good" onclick="SU={sec:'spelling',mode:'pick',cat:'all',n:10,feedback:'instant',timed:false};startSpelling()">Practice now ▶</button></div></div>`;
+}
+function renderRules() {
+  if (isKid()) return renderKidRules();
+  const ex = (cat, n) => SPELL[cat].words.slice(0, n).map(([w]) => `<span class="hl">${hl(w, cat)}</span>`).join(', ');
+  $('#app').innerHTML = `<div class="card rule">
+    <h2>📘 Spelling Rules Cheat Sheet</h2>
+    <h3>👯 Double Consonants</h3><ul>
+      <li><b>1-1-1 rule:</b> one syllable, one vowel, one final consonant → double before a vowel suffix: run → ru<b>nn</b>ing, stop → sto<b>pp</b>ed.</li>
+      <li><b>Stress rule:</b> if the stress is on the <i>last</i> syllable, double it: begin → begi<b>nn</b>ing, refer → refe<b>rr</b>ed, occur → occu<b>rr</b>ence, control → contro<b>ll</b>ed. If the stress is on the first syllable, don't: <i>visit → visited, open → opened</i>.</li>
+      <li><b>Prefix + root:</b> when a prefix ends with the same letter the root starts with, you get a double: <b>mis+spell</b> = mi<b>ss</b>pell, <b>un+necessary</b> = u<b>nn</b>ecessary, <b>dis+appear</b> = only one s (dis + appear)!</li>
+      <li><b>Memory tricks:</b> acco<b>mm</b>odate has room for two c's and two m's · nece<b>ss</b>ary: one <b>c</b>ollar, two <b>s</b>leeves · e<b>mb</b>a<b>rr</b>ass: you go <b>r</b>eally <b>r</b>ed and feel <b>s</b>o <b>s</b>illy.</li>
+      <li>Watch out for single-letter traps: <b>across</b>, <b>until</b>, <b>harass</b>, <b>apparent</b>.</li>
+      <li class="muted">Examples: ${ex('double', 12)}</li></ul>
+    <h3>🎭 -ance vs. -ence</h3><ul>
+      <li>Related <b>-ate / -ation</b> word → usually <b>-ance</b>: tolerate → toler<b>ance</b>, dominate → domin<b>ance</b>.</li>
+      <li><b>Soft c or g</b> (sounds like "s"/"j") → <b>-ence</b>: innoc<b>ence</b>, intellig<b>ence</b>. <b>Hard c or g</b> → <b>-ance</b>: signific<b>ance</b>, eleg<b>ance</b>.</li>
+      <li>Words from <b>refer, prefer, confer, occur</b> → <b>-ence</b>: refer<b>ence</b>, occurr<b>ence</b>.</li>
+      <li>If the related adjective ends in <b>-ant</b>, use <b>-ance</b> (important → import<b>ance</b>); if it ends in <b>-ent</b>, use <b>-ence</b> (confident → confid<b>ence</b>, different → differ<b>ence</b>).</li>
+      <li><b>Memory tricks:</b> "at<b>tend</b> a d<b>ance</b>" → attend<b>ance</b> · "the <b>audience</b> sees the sc<b>ene</b>" · "sent<b>ence</b> has three e's".</li>
+      <li class="muted">-ance: ${ex('ance', 10)}</li></ul>
+    <h3>👁️ ie vs. ei</h3><ul>
+      <li><b>"I before E</b> (bel<b>ie</b>ve, f<b>ie</b>ld, ch<b>ie</b>f),</li>
+      <li><b>except after C</b> (rec<b>ei</b>ve, c<b>ei</b>ling, dec<b>ei</b>ve, rec<b>ei</b>pt),</li>
+      <li><b>or when sounded like "ay"</b> as in n<b>ei</b>ghbor and w<b>ei</b>gh" (v<b>ei</b>n, r<b>ei</b>gn, fr<b>ei</b>ght, h<b>ei</b>r).</li>
+      <li><b>Rule-breakers to memorize:</b> w<b>ei</b>rd, s<b>ei</b>ze, <b>ei</b>ther, n<b>ei</b>ther, l<b>ei</b>sure, for<b>ei</b>gn, h<b>ei</b>ght, prot<b>ei</b>n, forf<b>ei</b>t, counterf<b>ei</b>t. Trick: "<i>Neither foreign sovereign seized the weird heifer's leisure.</i>"</li>
+      <li><b>-cie- exceptions:</b> when "ci" sounds like "sh" — anc<b>ie</b>nt, effic<b>ie</b>nt, suffic<b>ie</b>nt — or when i and e are in separate syllables — sc<b>i·e</b>nce, soc<b>i·e</b>ty.</li>
+      <li>And of course: fr<b>ie</b>nd — "a fr<b>ie</b>nd to the <b>end</b>."</li></ul>
+    <h3>📝 How HSPT spelling questions work</h3><ul>
+      <li>You see three sentences (A, B, C) and choice D, "No mistake." Find the sentence with a misspelled word.</li>
+      <li>Read every word carefully — the error is often in a long word in the middle of the sentence.</li>
+      <li>"No mistake" is correct sometimes (about 1 in 4 or 5), so don't be afraid to choose it.</li></ul>
+    <div class="row"><button class="btn sec" onclick="go('spelling')">← Spelling Lab</button><span class="sp"></span><button class="btn good" onclick="SU={sec:'spelling',mode:'pick',cat:'all',n:10,feedback:'instant',timed:false};startSpelling()">Practice now ▶</button></div></div>`;
+}
+
+/* =========================================================
+   QUIZ ENGINE
+   ========================================================= */
+let Q = null, lastCfg = null;
+function startSection() {
+  const s = SECTIONS[SU.sec];
+  startQuiz({ key: SU.sec, title: s.name, icon: s.icon, sec: SU.sec, n: SU.n, subs: SU.subs.slice(), feedback: SU.feedback, timed: SU.timed });
+}
+function startSpelling() {
+  const m = SPELL_MODES[SU.mode];
+  startQuiz({ key: 'spelling-' + SU.mode, title: `Spelling Lab · ${m.name}`, icon: m.icon, sec: 'spelling', mode: SU.mode, cat: SU.cat, n: SU.n, feedback: SU.feedback, timed: SU.timed });
+}
+function startMock() {
+  startQuiz({ key: 'mock', title: isKid() ? 'Big Boy Practice Test' : 'Mock Mini-Exam', icon: '🏫', sec: 'mock', n: 48, feedback: 'end', timed: true, mock: true });
+}
+function startMistakes() {
+  if (!P.mistakes.length) { toast('No saved mistakes — go practice! 💪'); return; }
+  startQuiz({ key: 'review', title: 'Mistake Review', icon: '🔁', sec: 'review', n: Math.min(20, P.mistakes.length), feedback: 'instant', timed: false, review: true });
+}
+function buildQs(c) {
+  if (c.fixedQs) return JSON.parse(JSON.stringify(c.fixedQs));
+  if (c.review) return JSON.parse(JSON.stringify(shuffle(P.mistakes).slice(0, c.n)));
+  if (c.mock) {
+    return [].concat(
+      GEN.verbal(10, Object.keys(SECTIONS.verbal.subs)),
+      GEN.quant(8, Object.keys(SECTIONS.quant.subs)),
+      passageQs(pick(PASSAGES)), draw(VOCAB, 4).map(vocabQ),
+      GEN.math(8),
+      GEN.language(6, ['usage', 'spell', 'comp']).sort((a, b) => ['usage', 'spell', 'comp'].indexOf(a.sub) - ['usage', 'spell', 'comp'].indexOf(b.sub))
+    );
+  }
+  if (c.sec === 'spelling') return GEN.spelling(c.n, c.mode, c.cat);
+  return GEN[c.sec](c.n, c.subs);
+}
+function startQuiz(cfg) {
+  lastCfg = cfg;
+  const qs = buildQs(cfg);
+  Q = { cfg, qs, i: 0, ans: qs.map(() => null), streak: 0, maxStreak: 0, xp: 0, done: false, spoken: {}, timer: null };
+  if (cfg.timed) Q.timeLeft = qs.reduce((s, q) => s + pace(q.sec), 0);
+  screen = 'quiz'; renderHeader(); renderQuiz(); startTimer();
+}
+function startTimer() {
+  if (!Q || !Q.cfg.timed || Q.done) return;
+  clearInterval(Q.timer);
+  Q.timer = setInterval(() => {
+    Q.timeLeft--; const el = $('#tm');
+    if (el) { el.textContent = mmss(Q.timeLeft); el.classList.toggle('low', Q.timeLeft <= 30); }
+    if (Q.timeLeft <= 0) { clearInterval(Q.timer); toast('⏰ Time is up!'); finishQuiz(); }
+  }, 1000);
+}
+const mmss = s => `${Math.floor(Math.max(0, s) / 60)}:${String(Math.max(0, s) % 60).padStart(2, '0')}`;
+const SECNAME = k => k === 'spelling' ? 'Spelling' : (SECTIONS[k] ? SECTIONS[k].name : k);
+
+function renderQuiz() {
+  const q = Q.qs[Q.i], a = Q.ans[Q.i], inst = Q.cfg.feedback === 'instant', locked = inst && a && a.locked;
+  const n = Q.qs.length, answeredCount = Q.ans.filter(x => x && (x.choice != null || x.typed)).length;
+  let body = '';
+  if (q.passage) body += `<div class="passage">${q.passage}</div>`;
+  body += `<div class="prompt">${q.prompt}</div>`;
+  if (q.typed) {
+    body += `<div class="row" style="margin:8px 0"><button class="btn sec" onclick="speak(Q.qs[Q.i].word)">🔊 Say the word</button><button class="btn sec" onclick="speak(Q.qs[Q.i].sentence.replace(/_+/,Q.qs[Q.i].word))">🔊 Use it in a sentence</button><button class="btn sec" onclick="hint()">💡 Hint</button></div>
+      <div class="sent">${esc(q.sentence)}</div><div id="hint" class="muted small"></div>
+      <div class="row" style="margin-top:10px"><input class="type" id="ti" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the word…" value="${a && a.typed ? esc(a.typed) : ''}" ${locked ? 'disabled' : ''} onkeydown="if(event.key==='Enter'){event.stopPropagation();submitTyped()}" oninput="if(Q.cfg.feedback==='end'){Q.ans[Q.i]={typed:this.value}}">
+      ${inst && !locked ? '<button class="btn" onclick="submitTyped()">Check ✓</button>' : ''}</div>`;
+  } else {
+    body += q.choices.map((c, i) => {
+      let cls = '';
+      if (locked) { if (i === q.answer) cls = 'ok'; else if (i === a.choice) cls = 'no'; }
+      else if (a && a.choice === i) cls = 'sel';
+      return `<button class="choice ${cls}" ${locked ? 'disabled' : ''} onclick="choose(${i})"><span class="lt">${LET[i]}</span><span>${c}</span></button>`;
+    }).join('');
+  }
+  if (locked) body += `<div class="fb ${a.correct ? 'ok' : 'no'}"><b>${a.correct ? pick(['✅ Correct!', '✅ Nice!', '✅ Nailed it!', '✅ You got it!']) : (q.typed ? `❌ Not quite. You typed “${esc(a.typed || '')}”. Correct: <b>${q.word}</b>` : `❌ The answer is ${LET[q.answer]}.`)}</b><br>${q.explain}</div>`;
+
+  const isLast = Q.i === n - 1;
+  let nav;
+  if (inst) nav = `<span class="sp"></span>${locked ? `<button class="btn good" id="nextBtn" onclick="next()">${isLast ? 'Finish 🏁' : 'Next ▶'}</button>` : ''}`;
+  else nav = `<button class="btn sec" ${Q.i === 0 ? 'disabled' : ''} onclick="Q.i--;renderQuiz()">◀ Back</button><span class="sp"></span><span class="muted small">${answeredCount}/${n} answered</span><button class="btn ${isLast ? 'good' : ''}" id="nextBtn" onclick="${isLast ? 'confirmFinish()' : 'next()'}">${isLast ? 'Finish 🏁' : 'Next ▶'}</button>`;
+
+  $('#app').innerHTML = `<div class="card">
+    <div class="qtop"><span style="font-size:24px">${Q.cfg.icon}</span><div><div class="tag">${Q.cfg.mock || Q.cfg.review ? SECNAME(q.sec) : Q.cfg.title}</div><b>Question ${Q.i + 1} of ${n}</b></div><span class="sp"></span>
+      ${inst ? `<span class="pill" title="Correct in a row">🔥 ${Q.streak}</span><span class="pill">✨ ${Q.xp} XP</span>` : ''}
+      ${Q.cfg.timed ? `<span class="pill">⏱️ <span id="tm" class="timer ${Q.timeLeft <= 30 ? 'low' : ''}">${mmss(Q.timeLeft)}</span></span>` : ''}
+      <button class="btn sec" style="padding:6px 12px;font-size:13px" onclick="confirmFinish(true)">End quiz</button></div>
+    <div class="prog"><div style="width:${((Q.i + (locked ? 1 : 0)) / n) * 100}%"></div></div>
+    ${body}
+    <div class="row" style="margin-top:16px">${nav}</div></div>`;
+  if (q.typed && !locked) {
+    const ti = $('#ti'); ti && ti.focus();
+    if (!Q.spoken[Q.i]) { Q.spoken[Q.i] = true; setTimeout(() => speak(q.word), 250); }
+  }
+}
+function hint() { const w = Q.qs[Q.i].word; $('#hint').innerHTML = `Starts with <b>${w[0].toUpperCase()}</b> and has <b>${w.length}</b> letters. Pattern: ${SPELL[Q.qs[Q.i].cat].name}.`; }
+function award(correct, el) {
+  if (correct) {
+    Q.streak++; Q.maxStreak = Math.max(Q.maxStreak, Q.streak);
+    const g = 10 + Math.min(10, 2 * Math.max(0, Q.streak - 2)) + (Q.cfg.timed ? 3 : 0);
+    Q.xp += g; return g;
+  }
+  Q.streak = 0; return 0;
+}
+function choose(i) {
+  const q = Q.qs[Q.i], inst = Q.cfg.feedback === 'instant';
+  if (inst) {
+    if (Q.ans[Q.i] && Q.ans[Q.i].locked) return;
+    const correct = i === q.answer;
+    Q.ans[Q.i] = { choice: i, correct, locked: true };
+    const g = award(correct); correct ? sfx.ok() : sfx.no();
+    renderQuiz();
+    if (g) xpFloat(`+${g} XP`, document.querySelectorAll('.choice')[i]);
+    if (correct && [5, 10, 15, 20, 25].includes(Q.streak)) toast(`🔥 ${Q.streak} in a row!`);
+  } else { Q.ans[Q.i] = { choice: i }; renderQuiz(); }
+}
+function submitTyped() {
+  const q = Q.qs[Q.i], v = ($('#ti').value || '').trim();
+  if (Q.cfg.feedback === 'end') { Q.ans[Q.i] = { typed: v }; Q.i < Q.qs.length - 1 ? next() : confirmFinish(); return; }
+  if (!v || (Q.ans[Q.i] && Q.ans[Q.i].locked)) return;
+  const correct = v.toLowerCase() === q.word.toLowerCase();
+  Q.ans[Q.i] = { typed: v, correct, locked: true };
+  const g = award(correct); correct ? sfx.ok() : sfx.no();
+  renderQuiz(); if (g) xpFloat(`+${g} XP`, $('.fb'));
+}
+function next() { if (Q.i < Q.qs.length - 1) { Q.i++; renderQuiz(); } else finishQuiz(); }
+function confirmFinish(early) {
+  const un = Q.ans.filter(a => !a || (a.choice == null && !a.typed)).length;
+  if ((early || un) && !confirm(early ? 'End the quiz now? Unanswered questions count as wrong.' : `You have ${un} unanswered question${un > 1 ? 's' : ''}. Finish anyway?`)) return;
+  finishQuiz();
+}
+
+/* =========================================================
+   FINISH / SCORING
+   ========================================================= */
+let R = null;
+function finishQuiz() {
+  if (Q.done) return;
+  Q.done = true; clearInterval(Q.timer);
+  const c = Q.cfg, inst = c.feedback === 'instant';
+  // grade every question
+  Q.qs.forEach((q, i) => {
+    const a = Q.ans[i] || {};
+    if (a.locked) return;
+    a.correct = q.typed ? !!a.typed && a.typed.trim().toLowerCase() === q.word.toLowerCase() : a.choice === q.answer;
+    Q.ans[i] = a;
+    if (!inst) award(a.correct);
+  });
+  const total = Q.qs.length, right = Q.ans.filter(a => a.correct).length, pct = Math.round(right / total * 100);
+  const lvBefore = lvl(P.xp), badgesBefore = new Set(P.badges);
+  let xp = Q.xp + 10 + (pct === 100 && total >= 10 ? 50 : 0);
+  P.xp += xp;
+  P.answered += total;
+  // per-section and per-spelling-pattern stats; mistake bank
+  Q.qs.forEach((q, i) => {
+    const ok = Q.ans[i].correct;
+    const s = P.sec[q.sec] = P.sec[q.sec] || { c: 0, t: 0 }; s.t++; if (ok) s.c++;
+    if (q.cat) { const k = P.cat[q.cat] = P.cat[q.cat] || { c: 0, t: 0 }; k.t++; if (ok) k.c++; }
+    const key = qkey(q), idx = P.mistakes.findIndex(m => qkey(m) === key);
+    if (ok && idx >= 0 && c.review) { P.mistakes.splice(idx, 1); P.fixed++; }
+    if (!ok && idx < 0 && (Q.ans[i].choice != null || Q.ans[i].typed)) P.mistakes.push(q);
+  });
+  if (P.mistakes.length > 300) P.mistakes = P.mistakes.slice(-300);
+  const prevBest = P.best[c.key];
+  const newBest = c.key !== 'review' && (prevBest == null || pct > prevBest) && !c.fixedQs;
+  if (newBest) P.best[c.key] = pct;
+  if (!P.days.includes(today())) P.days.push(today());
+  P.bestStreak = Math.max(P.bestStreak, Q.maxStreak);
+  if (c.mock) P.done = [...new Set([...P.done, 'verbal', 'quant', 'reading', 'math', 'language'])];
+  else if (SECTIONS[c.sec]) P.done = [...new Set([...P.done, c.sec])];
+  P.history.unshift({ d: new Date().toISOString(), t: c.title, s: right, n: total, p: pct, timed: !!c.timed });
+  P.history = P.history.slice(0, 100);
+  // badges
+  const earn = id => { if (!P.badges.includes(id)) P.badges.push(id); };
+  earn('first');
+  if (pct === 100 && total >= 10) earn('perfect');
+  if (Q.maxStreak >= 10) earn('streak10');
+  if (Q.maxStreak >= 25) earn('streak25');
+  if (c.sec === 'spelling' && total >= 20 && pct >= 90) earn('bee');
+  ['double', 'ance', 'ie'].forEach(k => { if (P.cat[k] && P.cat[k].c >= 50) earn(k); });
+  if (['verbal', 'quant', 'reading', 'math', 'language'].every(s => P.done.includes(s))) earn('round');
+  if (c.mock) { earn('mock'); if (pct >= 80) earn('mock80'); }
+  if (c.timed && pct >= 80) earn('speed');
+  if (P.fixed >= 10) earn('comeback');
+  if (P.days.length >= 3) earn('days3');
+  if (P.days.length >= 7) earn('days7');
+  if (P.answered >= 500) earn('q500');
+  if (P.xp >= 1000) earn('xp1000');
+  if (P.xp >= 5000) earn('xp5000');
+  save();
+  R = { pct, right, total, xp, newBest, prevBest, lvUp: lvl(P.xp) > lvBefore, newBadges: P.badges.filter(b => !badgesBefore.has(b)), onlyMissed: false, maxStreak: Q.maxStreak };
+  go('results');
+  if (pct >= 90 || R.lvUp) confetti();
+  R.lvUp ? sfx.up() : sfx.done();
+}
+function renderResults() {
+  const { pct, right, total, xp } = R;
+  const stars = pct >= 90 ? 3 : pct >= 75 ? 2 : pct >= 60 ? 1 : 0;
+  const msg = pct === 100 ? 'PERFECT SCORE! You\'re unstoppable! 💎' : pct >= 90 ? 'Outstanding work! 🌟' : pct >= 75 ? 'Great job — keep it up! 💪' : pct >= 60 ? 'Good effort! Review your mistakes and try again. 📈' : 'Every expert was once a beginner. Review and retry! 🚀';
+  const missed = Q.qs.map((q, i) => ({ q, a: Q.ans[i], i })).filter(x => !x.a.correct);
+  const list = (R.onlyMissed ? missed : Q.qs.map((q, i) => ({ q, a: Q.ans[i], i }))).map(({ q, a, i }) => {
+    const yours = q.typed ? (a.typed ? esc(a.typed) : '<i>no answer</i>') : (a.choice != null ? `${LET[a.choice]}. ${q.choices[a.choice]}` : '<i>no answer</i>');
+    const corr = q.typed ? q.word : `${LET[q.answer]}. ${q.choices[q.answer]}`;
+    return `<div class="rev ${a.correct ? 'ok' : 'no'}"><div class="small muted">#${i + 1} · ${SECNAME(q.sec)} ${a.correct ? '✅' : '❌'}</div>
+      <div style="margin:4px 0">${q.typed ? 'Spell: ' + esc(q.sentence) : q.prompt}</div>
+      ${a.correct ? `<div class="small">Your answer: ${yours}</div>` : `<div class="small" style="color:#fca5a5">Your answer: ${yours}</div><div class="small" style="color:#86efac">Correct: ${corr}</div>`}
+      <div class="small muted" style="margin-top:4px">${q.explain}</div></div>`;
+  }).join('');
+  $('#app').innerHTML = `<div class="card" style="text-align:center">
+      <div class="tag">${Q.cfg.title}</div>
+      <div class="stars">${'⭐'.repeat(stars)}${'<span style="opacity:.2">⭐</span>'.repeat(3 - stars)}</div>
+      <div class="big">${pct}%</div>
+      <div class="muted">${right} of ${total} correct · best streak 🔥 ${R.maxStreak}</div>
+      <h3 style="margin-top:12px">${msg}</h3>
+      <div class="row" style="justify-content:center;margin:12px 0">
+        <span class="pill">✨ +${xp} XP</span>
+        ${R.newBest ? `<span class="pill" style="border-color:var(--gold)">🏆 New personal best!${R.prevBest != null ? ` (was ${R.prevBest}%)` : ''}</span>` : ''}
+        ${R.lvUp ? `<span class="pill" style="border-color:var(--purple)">🎉 Level up! Now Lv ${lvl(P.xp)} · ${title(lvl(P.xp))}</span>` : ''}
+      </div>
+      ${R.newBadges.length ? `<div style="margin:10px 0"><b>New badge${R.newBadges.length > 1 ? 's' : ''} unlocked!</b><div class="badges" style="margin-top:8px">${R.newBadges.map(id => { const b = BADGES.find(x => x.id === id); return `<div class="badge"><div class="bi">${b.i}</div><b>${b.n}</b><div class="small muted">${b.d}</div></div>`; }).join('')}</div></div>` : ''}
+      <div class="row" style="justify-content:center;margin-top:14px">
+        ${missed.length ? `<button class="btn warn" onclick="retryMissed()">🔁 Retry ${missed.length} missed</button>` : ''}
+        <button class="btn good" onclick="startQuiz(Object.assign({},lastCfg,{fixedQs:null}))">🎲 Try again (new questions)</button>
+        <button class="btn sec" onclick="go('home')">🏠 Home</button>
+      </div></div>
+    <div class="card" style="margin-top:14px">
+      <div class="row"><h3>Review answers</h3><span class="sp"></span>
+        <button class="chip ${!R.onlyMissed ? 'on' : ''}" onclick="R.onlyMissed=false;renderResults()">All (${total})</button>
+        <button class="chip ${R.onlyMissed ? 'on' : ''}" onclick="R.onlyMissed=true;renderResults()">Missed (${missed.length})</button></div>
+      ${list || '<p class="muted">Nothing missed — amazing!</p>'}</div>`;
+}
+function retryMissed() {
+  const qs = Q.qs.filter((q, i) => !Q.ans[i].correct).map(q => {
+    q = JSON.parse(JSON.stringify(q));
+    if (q.shuf) { const c = q.choices[q.answer]; q.choices = shuffle(q.choices); q.answer = q.choices.indexOf(c); }
+    return q;
+  });
+  const base = lastCfg;
+  startQuiz(Object.assign({}, base, { fixedQs: qs, n: qs.length, title: base.title + ' · Retry', key: base.key + '-retry' }));
+  lastCfg = base;
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+function renderStats() {
+  const tot = Object.values(P.sec).reduce((a, s) => ({ c: a.c + s.c, t: a.t + s.t }), { c: 0, t: 0 });
+  const bar = (label, s, color) => { const p = s && s.t ? Math.round(s.c / s.t * 100) : 0; return `<div class="row" style="margin:6px 0"><div style="width:190px">${label}</div><div class="bar"><div style="width:${p}%;background:${color}"></div></div><div style="width:110px;text-align:right" class="small">${s && s.t ? `${p}% (${s.c}/${s.t})` : '—'}</div></div>`; };
+  const n = lvl(P.xp);
+  $('#app').innerHTML = `
+    <div class="card"><div class="row"><div style="font-size:44px">🎓</div><div><h2>${esc(P.name || 'Student')}</h2><div class="muted">Level ${n} · ${title(n)} · ${fmt(P.xp)} XP · ${fmt(100 * n - (P.xp - 50 * (n - 1) * n))} XP to next level</div></div></div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card" style="text-align:center"><div class="big" style="font-size:36px">${tot.t ? Math.round(tot.c / tot.t * 100) : 0}%</div><div class="muted small">Overall accuracy</div></div>
+        <div class="card" style="text-align:center"><div class="big" style="font-size:36px">${fmt(P.answered)}</div><div class="muted small">Questions answered</div></div>
+        <div class="card" style="text-align:center"><div class="big" style="font-size:36px">🔥 ${P.bestStreak}</div><div class="muted small">Best answer streak</div></div>
+        <div class="card" style="text-align:center"><div class="big" style="font-size:36px">${P.days.length}</div><div class="muted small">Days practiced</div></div>
+      </div></div>
+    <div class="card" style="margin-top:14px"><h3>Accuracy by section</h3>
+      ${Object.entries(SECTIONS).map(([k, s]) => bar(`${s.icon} ${s.name}`, P.sec[k], '#38bdf8')).join('')}
+      ${bar('🐝 Spelling Lab', P.sec.spelling, '#fbbf24')}
+      <h3 style="margin-top:16px">Spelling patterns</h3>
+      ${Object.entries(SPELL).map(([k, s]) => bar(`${s.icon} ${s.name}`, P.cat[k], '#a78bfa')).join('')}</div>
+    <div class="card" style="margin-top:14px"><h3>Badges (${P.badges.length}/${BADGES.length})</h3>
+      <div class="badges">${BADGES.map(b => `<div class="badge ${P.badges.includes(b.id) ? '' : 'locked'}"><div class="bi">${b.i}</div><b>${b.n}</b><div class="small muted">${b.d}</div></div>`).join('')}</div></div>
+    <div class="card" style="margin-top:14px"><h3>Recent quizzes</h3>
+      ${P.history.length ? `<table><tr><th>Date</th><th>Quiz</th><th>Score</th><th></th></tr>${P.history.slice(0, 20).map(h => `<tr><td>${new Date(h.d).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</td><td>${esc(h.t)}</td><td><b style="color:${h.p >= 80 ? 'var(--good)' : h.p >= 60 ? 'var(--gold)' : 'var(--bad)'}">${h.p}%</b> <span class="muted small">(${h.s}/${h.n})</span></td><td>${h.timed ? '⏱️' : ''}</td></tr>`).join('')}</table>` : '<p class="muted">No quizzes yet.</p>'}</div>
+    <div class="row" style="margin-top:14px"><button class="btn sec" onclick="go('home')">← Home</button><span class="sp"></span>
+      <button class="btn sec" onclick="const v=prompt('Change name:',P.name);if(v&&v.trim()){P.name=v.trim();save();go('stats')}">✏️ Change name</button>
+      <button class="btn danger" onclick="if(confirm('Reset ALL progress, XP, badges and history? This cannot be undone.')){P=defaultP();save();go('home')}">Reset progress</button></div>`;
+}
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+document.addEventListener('keydown', e => {
+  if (screen !== 'quiz' || !Q || Q.done) return;
+  if (e.target.tagName === 'INPUT') return;
+  const q = Q.qs[Q.i]; if (!q) return;
+  const k = e.key.toLowerCase();
+  const idx = '1234'.indexOf(k) >= 0 ? '1234'.indexOf(k) : 'abcd'.indexOf(k);
+  if (!q.typed && idx >= 0 && idx < q.choices.length) { choose(idx); e.preventDefault(); }
+  else if (e.key === 'Enter') { const b = $('#nextBtn'); if (b) { b.click(); e.preventDefault(); } }
+});
+
+document.body.classList.toggle('kid', isKid());
+renderHeader();
+renderHome();
+</script>
+</body>
+</html>
